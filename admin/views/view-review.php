@@ -20,7 +20,8 @@ $labels = array(
 	'found'       => array( __( 'Found now', 'advanced-search-logger' ), __( 'These find products today without any fix (a product was added, a rule exists, or Arabic/Persian letters and digits are matched).', 'advanced-search-logger' ) ),
 	'ignored'     => array( __( 'Ignored', 'advanced-search-logger' ), __( 'Junk or irrelevant searches you chose to hide.', 'advanced-search-logger' ) ),
 );
-$base = admin_url( 'admin.php?page=asl-review' );
+$base     = admin_url( 'admin.php?page=asl-review' );
+$requests = ASL_Requests::open_by_term();
 ?>
 <div class="wrap asl-wrap asl-review">
 	<div class="asl-head">
@@ -89,7 +90,17 @@ $base = admin_url( 'admin.php?page=asl-review' );
 			<tbody>
 			<?php foreach ( $items as $norm => $it ) : ?>
 				<tr>
-					<td><a href="<?php echo esc_url( ASL_Admin::logs_url( $norm ) ); ?>" dir="auto"><?php echo esc_html( $it['term'] ); ?></a></td>
+					<td>
+						<a href="<?php echo esc_url( ASL_Admin::logs_url( $norm ) ); ?>" dir="auto"><?php echo esc_html( $it['term'] ); ?></a>
+						<?php if ( ! empty( $requests[ $norm ] ) ) : ?>
+							<a class="asl-badge asl-badge--bad asl-req-count" href="<?php echo esc_url( add_query_arg( array( 'page' => 'asl-requests', 'status' => 'open', 'term' => rawurlencode( $it['term'] ) ), admin_url( 'admin.php' ) ) ); ?>" title="<?php esc_attr_e( 'Customers waiting for a call', 'advanced-search-logger' ); ?>">
+								<?php
+								/* translators: %s: number of phone requests */
+								echo esc_html( sprintf( _n( '%s request', '%s requests', (int) $requests[ $norm ], 'advanced-search-logger' ), asl_num( $requests[ $norm ] ) ) );
+								?>
+							</a>
+						<?php endif; ?>
+					</td>
 					<td class="num"><?php echo esc_html( asl_num( $it['searches'] ) ); ?></td>
 					<?php if ( in_array( $tab, array( 'approximate', 'fixed', 'found' ), true ) ) : ?>
 						<td>

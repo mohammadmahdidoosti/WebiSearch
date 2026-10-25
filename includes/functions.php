@@ -22,15 +22,16 @@ function asl_capability() {
 /**
  * Full table name.
  *
- * @param string $name logs|rules|clicks.
+ * @param string $name logs|rules|clicks|requests.
  * @return string
  */
 function asl_table( $name ) {
 	global $wpdb;
 	$map = array(
-		'logs'   => 'asl_search_logs',
-		'rules'  => 'asl_synonyms',
-		'clicks' => 'asl_clicks',
+		'logs'     => 'asl_search_logs',
+		'rules'    => 'asl_synonyms',
+		'clicks'   => 'asl_clicks',
+		'requests' => 'asl_requests',
 	);
 	return $wpdb->prefix . ( isset( $map[ $name ] ) ? $map[ $name ] : $name );
 }
@@ -214,6 +215,37 @@ function asl_client_ip() {
  */
 function asl_num( $n, $decimals = 0 ) {
 	return number_format_i18n( (float) $n, $decimals );
+}
+
+/**
+ * Short money amount for KPI tiles: "۲٫۷ میلیارد تومان" / "2.7B $". Full amount goes in a tooltip.
+ *
+ * @param float $amount Amount in the store currency.
+ * @return string Plain text.
+ */
+function asl_compact_money( $amount ) {
+	return trim( implode( ' ', asl_compact_money_parts( $amount ) ) );
+}
+
+/**
+ * Compact amount split into [number with unit, currency symbol] so the symbol can be styled smaller.
+ *
+ * @param float $amount Amount.
+ * @return string[]
+ */
+function asl_compact_money_parts( $amount ) {
+	$amount = (float) $amount;
+	$symbol = function_exists( 'get_woocommerce_currency_symbol' ) ? html_entity_decode( get_woocommerce_currency_symbol(), ENT_QUOTES, 'UTF-8' ) : '';
+	$units  = asl_is_persian()
+		? array( 1e12 => 'هزار میلیارد', 1e9 => 'میلیارد', 1e6 => 'میلیون' )
+		: array( 1e12 => 'T', 1e9 => 'B', 1e6 => 'M' );
+	foreach ( $units as $size => $label ) {
+		if ( abs( $amount ) >= $size ) {
+			$n = $amount / $size;
+			return array( asl_num( $n, $n < 100 ? 1 : 0 ) . ' ' . $label, $symbol );
+		}
+	}
+	return array( asl_num( $amount ), $symbol );
 }
 
 /**

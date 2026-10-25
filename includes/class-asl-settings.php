@@ -49,9 +49,21 @@ class ASL_Settings {
 			'fallback_notice'   => 'on',
 			'no_results_help'   => 'on',
 			'no_results_text'   => '',
+			// Product requests ("leave your number").
+			'request_enabled'      => 'on',
+			'request_replace'      => 'on',
+			'request_on_rescued'   => 'on',
+			'request_name'         => 'on',
+			'request_title'        => '',
+			'request_text'         => '',
+			'request_button'       => '',
+			'request_success'      => '',
+			'request_notify'       => 'on',
+			'request_notify_email' => '',
 			// Click & conversion tracking.
 			'track_clicks'      => 'on',
 			'track_conversions' => 'on',
+			'revenue_status'    => 'completed',
 			'live_selectors'    => '',
 			// Display.
 			'jalali_dates'      => $persian ? 'on' : 'off',

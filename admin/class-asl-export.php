@@ -31,6 +31,7 @@ class ASL_Export {
 			'terms' => 'search-terms',
 			'rules' => 'search-rules',
 			'review' => 'failed-searches-review',
+			'requests' => 'product-requests',
 		);
 		if ( ! isset( $names[ $type ] ) ) {
 			$type = 'logs';
@@ -43,6 +44,8 @@ class ASL_Export {
 			self::write_terms( $out, $filters );
 		} elseif ( 'rules' === $type ) {
 			self::write_rules( $out );
+		} elseif ( 'requests' === $type ) {
+			self::write_requests( $out, isset( $_GET['status'] ) ? sanitize_key( wp_unslash( $_GET['status'] ) ) : 'all' );
 		} elseif ( 'review' === $type ) {
 			self::write_review( $out, isset( $_GET['status'] ) ? sanitize_key( wp_unslash( $_GET['status'] ) ) : 'missing' );
 		} else {
@@ -93,6 +96,45 @@ class ASL_Export {
 	 */
 	private static function put( $fh, array $row ) {
 		fputcsv( $fh, array_map( array( __CLASS__, 'cell' ), $row ), ',', '"', '\\' );
+	}
+
+	/**
+	 * Product requests.
+	 *
+	 * @param resource $fh     Handle.
+	 * @param string   $status Status filter.
+	 */
+	public static function write_requests( $fh, $status ) {
+		fwrite( $fh, "\xEF\xBB\xBF" ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite
+		$statuses = ASL_Requests::statuses();
+		self::put(
+			$fh,
+			array(
+				'ID',
+				__( 'Product searched', 'advanced-search-logger' ),
+				__( 'Name', 'advanced-search-logger' ),
+				__( 'Phone', 'advanced-search-logger' ),
+				__( 'Status', 'advanced-search-logger' ),
+				__( 'Note', 'advanced-search-logger' ),
+				__( 'Date', 'advanced-search-logger' ),
+				__( 'Page', 'advanced-search-logger' ),
+			)
+		);
+		foreach ( ASL_Requests::query( array( 'status' => $status ), 0 ) as $r ) {
+			self::put(
+				$fh,
+				array(
+					$r['id'],
+					$r['term'],
+					$r['name'],
+					$r['phone'],
+					isset( $statuses[ $r['status'] ] ) ? $statuses[ $r['status'] ] : $r['status'],
+					$r['note'],
+					asl_format_date( $r['created'], true, true ),
+					$r['page_url'],
+				)
+			);
+		}
 	}
 
 	/**

@@ -16,7 +16,7 @@ class ASL_Admin {
 	 *
 	 * @var string[]
 	 */
-	private $pages = array( 'asl-dashboard', 'asl-review', 'asl-all-logs', 'asl-synonyms', 'asl-settings' );
+	private $pages = array( 'asl-dashboard', 'asl-review', 'asl-requests', 'asl-all-logs', 'asl-synonyms', 'asl-settings' );
 
 	/**
 	 * Constructor.
@@ -40,6 +40,9 @@ class ASL_Admin {
 		add_action( 'admin_post_asl_delete_term', array( $this, 'action_delete_term' ) );
 		add_action( 'admin_post_asl_test_email', array( $this, 'action_test_email' ) );
 		add_action( 'admin_post_asl_review_decide', array( $this, 'action_review_decide' ) );
+		add_action( 'admin_post_asl_request_update', array( $this, 'action_request_update' ) );
+		add_action( 'admin_post_asl_request_delete', array( $this, 'action_request_delete' ) );
+		add_action( 'admin_post_asl_request_term', array( $this, 'action_request_term' ) );
 
 		// v2 links used admin.php?asl_action=...; keep them working.
 		add_action( 'admin_init', array( $this, 'legacy_actions' ) );
@@ -57,6 +60,9 @@ class ASL_Admin {
 		add_menu_page( __( 'Search Logger', 'advanced-search-logger' ), __( 'Search Logger', 'advanced-search-logger' ), $cap, 'asl-dashboard', array( $this, 'render_dashboard_page' ), 'dashicons-search', 25 );
 		add_submenu_page( 'asl-dashboard', __( 'Search Analytics Dashboard', 'advanced-search-logger' ), __( 'Dashboard', 'advanced-search-logger' ), $cap, 'asl-dashboard', array( $this, 'render_dashboard_page' ) );
 		add_submenu_page( 'asl-dashboard', __( 'Failed searches review', 'advanced-search-logger' ), __( 'Failed searches', 'advanced-search-logger' ), $cap, 'asl-review', array( $this, 'render_review_page' ) );
+		$new_requests = ASL_Requests::status_counts()['new'];
+		$badge        = $new_requests ? ' <span class="awaiting-mod count-' . (int) $new_requests . '"><span class="pending-count">' . esc_html( asl_num( $new_requests ) ) . '</span></span>' : '';
+		add_submenu_page( 'asl-dashboard', __( 'Product requests', 'advanced-search-logger' ), __( 'Product requests', 'advanced-search-logger' ) . $badge, $cap, 'asl-requests', array( $this, 'render_requests_page' ) );
 		$logs = add_submenu_page( 'asl-dashboard', __( 'All Search Logs', 'advanced-search-logger' ), __( 'All Logs', 'advanced-search-logger' ), $cap, 'asl-all-logs', array( $this, 'render_logs_page' ) );
 		$syn  = add_submenu_page( 'asl-dashboard', __( 'Synonyms & Redirects', 'advanced-search-logger' ), __( 'Synonyms & Redirects', 'advanced-search-logger' ), $cap, 'asl-synonyms', array( $this, 'render_synonyms_page' ) );
 		add_submenu_page( 'asl-dashboard', __( 'Search Logger Settings', 'advanced-search-logger' ), __( 'Settings', 'advanced-search-logger' ), 'manage_options', 'asl-settings', array( $this, 'render_settings_page' ) );
@@ -166,6 +172,11 @@ class ASL_Admin {
 			'unresolved'    => __( 'The term is back in the list.', 'advanced-search-logger' ),
 			'mail_ok'       => __( 'Test report sent. Check the inbox (and spam folder).', 'advanced-search-logger' ),
 			'mail_fail'     => __( 'WordPress could not send the e-mail. Check your SMTP/mail settings.', 'advanced-search-logger' ),
+			'req_saved'     => __( 'Request updated.', 'advanced-search-logger' ),
+			/* translators: %s: number */
+			'req_deleted'   => sprintf( _n( '%s request deleted.', '%s requests deleted.', $n, 'advanced-search-logger' ), asl_num( $n ) ),
+			/* translators: %s: number */
+			'req_bulk'      => sprintf( _n( '%s request updated.', '%s requests updated.', $n, 'advanced-search-logger' ), asl_num( $n ) ),
 			'error'         => $err,
 		);
 		if ( ! $msg || ! isset( $map[ $msg ] ) || '' === $map[ $msg ] ) {
@@ -315,6 +326,70 @@ class ASL_Admin {
 		ASL_Review::decide( ASL_Normalizer::normalize( $term ), in_array( $decision, array( 'missing', 'ignore' ), true ) ? $decision : '' );
 		$ref = wp_get_referer();
 		$this->back( $ref ? $ref : 'asl-review', 'rules_updated' );
+	}
+
+	/**
+	 * Product requests: change status / note of one request.
+	 */
+	public function action_request_update() {
+		$this->guard( 'asl_request_update' );
+		// phpcs:disable WordPress.Security.NonceVerification.Missing -- checked in guard().
+		$id     = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : 0;
+		$status = isset( $_POST['status'] ) ? sanitize_key( wp_unslash( $_POST['status'] ) ) : '';
+		$note   = isset( $_POST['note'] ) ? sanitize_textarea_field( wp_unslash( $_POST['note'] ) ) : null;
+		// phpcs:enable
+		ASL_Requests::update( array( $id ), $status, $note );
+		$ref = wp_get_referer();
+		$this->back( $ref ? $ref : 'asl-requests', 'req_saved' );
+	}
+
+	/**
+	 * Product requests: delete one.
+	 */
+	public function action_request_delete() {
+		$this->guard( 'asl_request_delete' );
+		$id  = isset( $_GET['id'] ) ? absint( $_GET['id'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$n   = ASL_Requests::delete( array( $id ) );
+		$ref = wp_get_referer();
+		$this->back( $ref ? $ref : 'asl-requests', 'req_deleted', array( 'asl_n' => $n ) );
+	}
+
+	/**
+	 * Product requests: mark every open request of a product (e.g. after calling everyone).
+	 */
+	public function action_request_term() {
+		$this->guard( 'asl_request_term' );
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
+		$term   = isset( $_GET['term'] ) ? sanitize_text_field( wp_unslash( $_GET['term'] ) ) : '';
+		$status = isset( $_GET['status'] ) ? sanitize_key( wp_unslash( $_GET['status'] ) ) : '';
+		// phpcs:enable
+		$n   = ASL_Requests::update_term( ASL_Normalizer::normalize( $term ), $status );
+		$ref = wp_get_referer();
+		$this->back( $ref ? $ref : 'asl-requests', 'req_bulk', array( 'asl_n' => $n ) );
+	}
+
+	/**
+	 * Product requests page.
+	 */
+	public function render_requests_page() {
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
+		$status  = isset( $_GET['status'] ) ? sanitize_key( wp_unslash( $_GET['status'] ) ) : 'open';
+		$status  = in_array( $status, array_merge( array( 'open', 'all' ), array_keys( ASL_Requests::statuses() ) ), true ) ? $status : 'open';
+		$q       = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_GET['q'] ) ) : '';
+		$term    = isset( $_GET['term'] ) ? sanitize_text_field( wp_unslash( $_GET['term'] ) ) : '';
+		$paged   = isset( $_GET['paged'] ) ? max( 1, absint( $_GET['paged'] ) ) : 1;
+		// phpcs:enable
+		$filters  = array(
+			'status' => $status,
+			'q'      => $q,
+			'term'   => '' !== $term ? ASL_Normalizer::normalize( $term ) : '',
+		);
+		$per_page = 30;
+		$total    = ASL_Requests::count( $filters );
+		$rows     = ASL_Requests::query( $filters, $per_page, $paged );
+		$counts   = ASL_Requests::status_counts();
+		$top      = ASL_Requests::top_terms( 10 );
+		require ASL_PLUGIN_DIR . 'admin/views/view-requests.php';
 	}
 
 	/**
@@ -550,9 +625,22 @@ class ASL_Admin {
 		$this->field( 'no_results_text', __( 'Text for empty result pages', 'advanced-search-logger' ), 'html', 'asl_search_section', __( 'Optional. Example: Didn\'t find it? Call us on 021-… or message us on WhatsApp — we probably have it.', 'advanced-search-logger' ) );
 		$this->field( 'nocache_search', __( 'Do not cache search result pages', 'advanced-search-logger' ), 'checkbox', 'asl_search_section', __( 'Page caches (LiteSpeed, WP Rocket, W3 Total Cache...) serve cached search pages without running WordPress, so those searches would be missing from the logs.', 'advanced-search-logger' ) );
 
+		add_settings_section( 'asl_request_section', __( 'Product requests ("leave your number")', 'advanced-search-logger' ), array( $this, 'request_section_intro' ), $p );
+		$this->field( 'request_enabled', __( 'Show the request box', 'advanced-search-logger' ), 'checkbox', 'asl_request_section', __( 'When a search finds nothing (even after the automatic rescue), visitors see a box to leave their phone number instead of a dead end. For page builders use the [webisearch_request_form] shortcode.', 'advanced-search-logger' ) );
+		$this->field( 'request_replace', __( 'Replace the "No products were found" message', 'advanced-search-logger' ), 'checkbox', 'asl_request_section', __( 'Hides the theme\'s default WooCommerce message on empty search pages, so the box takes its place.', 'advanced-search-logger' ) );
+		$this->field( 'request_on_rescued', __( 'Also offer it above close matches', 'advanced-search-logger' ), 'checkbox', 'asl_request_section', __( 'When the exact product is not found and visitors see related products (found with fewer words), a one-line, expandable version is shown under "Showing results for …".', 'advanced-search-logger' ) );
+		$this->field( 'request_name', __( 'Ask for the name', 'advanced-search-logger' ), 'checkbox', 'asl_request_section', __( 'Optional field; the phone number is always required.', 'advanced-search-logger' ) );
+		$this->field( 'request_title', __( 'Box title', 'advanced-search-logger' ), 'text', 'asl_request_section', __( 'Leave empty for the default.', 'advanced-search-logger' ) . ' ' . sprintf( /* translators: %s: default text */ __( 'Default: %s', 'advanced-search-logger' ), ASL_Requests::text( 'request_title', '{term}' ) ) . ' ' . __( '{term} is replaced with what the visitor searched.', 'advanced-search-logger' ) );
+		$this->field( 'request_text', __( 'Box text', 'advanced-search-logger' ), 'text', 'asl_request_section', sprintf( /* translators: %s: default text */ __( 'Default: %s', 'advanced-search-logger' ), ASL_Requests::text( 'request_text', '{term}' ) ) );
+		$this->field( 'request_button', __( 'Button text', 'advanced-search-logger' ), 'text', 'asl_request_section', sprintf( /* translators: %s: default text */ __( 'Default: %s', 'advanced-search-logger' ), ASL_Requests::text( 'request_button' ) ) );
+		$this->field( 'request_success', __( 'Thank-you message', 'advanced-search-logger' ), 'text', 'asl_request_section', sprintf( /* translators: %s: default text */ __( 'Default: %s', 'advanced-search-logger' ), ASL_Requests::text( 'request_success', '{term}' ) ) );
+		$this->field( 'request_notify', __( 'E-mail each new request', 'advanced-search-logger' ), 'checkbox', 'asl_request_section' );
+		$this->field( 'request_notify_email', __( 'Send request e-mails to', 'advanced-search-logger' ), 'text', 'asl_request_section', __( 'Separate several addresses with commas. Empty = the site admin e-mail.', 'advanced-search-logger' ) . ' ' . __( 'For SMS, developers can use the asl_request_created action.', 'advanced-search-logger' ) );
+
 		add_settings_section( 'asl_tracking_section', __( 'Clicks & conversions', 'advanced-search-logger' ), array( $this, 'tracking_section_intro' ), $p );
 		$this->field( 'track_clicks', __( 'Track clicks on search results', 'advanced-search-logger' ), 'checkbox', 'asl_tracking_section', __( 'Measures click-through rate and click position for the results page and for live search dropdowns.', 'advanced-search-logger' ) );
 		$this->field( 'track_conversions', __( 'Track add-to-cart and revenue (WooCommerce)', 'advanced-search-logger' ), 'checkbox', 'asl_tracking_section' );
+		$this->field( 'revenue_status', __( 'Count revenue when the order is', 'advanced-search-logger' ), 'revenue_status', 'asl_tracking_section', __( 'Cash-on-delivery orders are "Processing" before any money is received, so "Completed" gives the real figure. Revenue of orders that are later cancelled, failed or refunded is always taken back.', 'advanced-search-logger' ) );
 		$this->field( 'live_selectors', __( 'Extra live-search CSS selectors', 'advanced-search-logger' ), 'textarea', 'asl_tracking_section', __( 'Only needed if clicks in your theme\'s live search dropdown are not counted. One CSS selector per line, e.g. .my-search-dropdown', 'advanced-search-logger' ) );
 
 		add_settings_section( 'asl_cleanup_section', __( 'Privacy & storage', 'advanced-search-logger' ), null, $p );
@@ -565,6 +653,14 @@ class ASL_Admin {
 		$this->field( 'email_recipient', __( 'Recipients', 'advanced-search-logger' ), 'text', 'asl_email_section', __( 'Separate several addresses with commas.', 'advanced-search-logger' ) );
 		$this->field( 'email_subject', __( 'Email subject', 'advanced-search-logger' ), 'text', 'asl_email_section' );
 		$this->field( 'email_body', __( 'Email body template', 'advanced-search-logger' ), 'editor', 'asl_email_section', __( 'Leave empty to use the default template.', 'advanced-search-logger' ) . ' ' . __( 'Placeholders:', 'advanced-search-logger' ) . ' {site_name} {report_date} {kpis} {total_searches} {no_result_rate} {top_searches} {no_result_searches} {trending_searches} {dashboard_url}' );
+	}
+
+	/**
+	 * Intro for the product requests section.
+	 */
+	public function request_section_intro() {
+		/* translators: %s: link to the product requests page */
+		echo '<p>' . sprintf( esc_html__( 'Turn "nothing found" into a sales lead. Requests appear in %s.', 'advanced-search-logger' ), '<a href="' . esc_url( admin_url( 'admin.php?page=asl-requests' ) ) . '">' . esc_html__( 'Product requests', 'advanced-search-logger' ) . '</a>' ) . '</p>';
 	}
 
 	/**
@@ -628,6 +724,17 @@ class ASL_Admin {
 				}
 				echo '</select>';
 				break;
+			case 'revenue_status':
+				$opts = array(
+					'completed' => __( 'Completed only (recommended)', 'advanced-search-logger' ),
+					'paid'      => __( 'Processing or completed', 'advanced-search-logger' ),
+				);
+				printf( '<select id="%s" name="%s">', esc_attr( $id ), esc_attr( $name ) );
+				foreach ( $opts as $k => $label ) {
+					printf( '<option value="%s" %s>%s</option>', esc_attr( $k ), selected( $val, $k, false ), esc_html( $label ) );
+				}
+				echo '</select>';
+				break;
 			case 'html':
 				printf( '<textarea id="%s" name="%s" rows="3" class="large-text" dir="auto">%s</textarea>', esc_attr( $id ), esc_attr( $name ), esc_textarea( $val ) );
 				break;
@@ -673,10 +780,17 @@ class ASL_Admin {
 		if ( isset( $in['search_in'] ) ) {
 			$out['search_in'] = in_array( $in['search_in'], array( 'all', 'title_excerpt', 'title' ), true ) ? $in['search_in'] : 'all';
 		}
+		if ( isset( $in['revenue_status'] ) ) {
+			$new = 'paid' === $in['revenue_status'] ? 'paid' : 'completed';
+			if ( $new !== $out['revenue_status'] ) {
+				update_option( 'asl_revenue_resync', 1, false ); // Recount existing orders with the new rule.
+			}
+			$out['revenue_status'] = $new;
+		}
 		if ( isset( $in['no_results_text'] ) ) {
 			$out['no_results_text'] = wp_kses_post( $in['no_results_text'] );
 		}
-		foreach ( array( 'variant_search', 'smart_fallback', 'fallback_notice', 'no_results_help', 'logging_enabled', 'ignore_bots', 'ignore_spam', 'log_rest', 'store_user', 'normalize_query', 'nocache_search', 'track_clicks', 'track_conversions', 'jalali_dates', 'email_enable' ) as $k ) {
+		foreach ( array( 'variant_search', 'smart_fallback', 'fallback_notice', 'no_results_help', 'logging_enabled', 'ignore_bots', 'ignore_spam', 'log_rest', 'store_user', 'normalize_query', 'nocache_search', 'track_clicks', 'track_conversions', 'jalali_dates', 'email_enable', 'request_enabled', 'request_replace', 'request_on_rescued', 'request_name', 'request_notify' ) as $k ) {
 			if ( isset( $in[ $k ] ) ) {
 				$out[ $k ] = 'on' === $in[ $k ] ? 'on' : 'off';
 			}
@@ -702,6 +816,15 @@ class ASL_Admin {
 		if ( isset( $in['email_recipient'] ) ) {
 			$emails                 = array_filter( array_map( 'sanitize_email', array_map( 'trim', explode( ',', $in['email_recipient'] ) ) ) );
 			$out['email_recipient'] = $emails ? implode( ', ', $emails ) : get_option( 'admin_email' );
+		}
+		foreach ( array( 'request_title', 'request_text', 'request_button', 'request_success' ) as $k ) {
+			if ( isset( $in[ $k ] ) ) {
+				$out[ $k ] = sanitize_text_field( $in[ $k ] );
+			}
+		}
+		if ( isset( $in['request_notify_email'] ) ) {
+			$emails                      = array_filter( array_map( 'sanitize_email', array_map( 'trim', explode( ',', $in['request_notify_email'] ) ) ) );
+			$out['request_notify_email'] = implode( ', ', $emails );
 		}
 		if ( isset( $in['email_subject'] ) ) {
 			$out['email_subject'] = sanitize_text_field( $in['email_subject'] );

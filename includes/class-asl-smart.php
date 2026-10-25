@@ -28,7 +28,7 @@ class ASL_Smart {
 	/**
 	 * Rescued search on the current page (for the notice).
 	 *
-	 * @var array|null [original, used]
+	 * @var array|null [original, used, kind (cleanup|spelling|fewer_words)]
 	 */
 	public static $notice = null;
 
@@ -244,6 +244,7 @@ class ASL_Smart {
 		// Remember the decision per term (also keeps page 2, 3... consistent).
 		$cache_key = 'asl_fix_' . md5( $term . '|' . wp_json_encode( $vars['post_type'] ?? '' ) . '|' . get_option( 'asl_vocab_ver', '' ) );
 		$chosen    = get_transient( $cache_key );
+		$kind      = '';
 		if ( false === $chosen ) {
 			$chosen = '';
 			$tests  = 0;
@@ -254,10 +255,13 @@ class ASL_Smart {
 				}
 				if ( self::acceptable( $vars, $step ) ) {
 					$chosen = $step['term'];
+					$kind   = $step['kind'];
 					break;
 				}
 			}
-			set_transient( $cache_key, $chosen, 6 * HOUR_IN_SECONDS );
+			set_transient( $cache_key, '' === $chosen ? '' : $kind . "\x1F" . $chosen, 6 * HOUR_IN_SECONDS );
+		} elseif ( false !== strpos( $chosen, "\x1F" ) ) {
+			list( $kind, $chosen ) = explode( "\x1F", $chosen, 2 );
 		}
 		if ( '' === $chosen ) {
 			return null;
@@ -273,7 +277,7 @@ class ASL_Smart {
 		$q->found_posts   = max( (int) $new->found_posts, count( $new->posts ) );
 		$q->max_num_pages = (int) $new->max_num_pages;
 		if ( $q->is_main_query() && 'standard' === $source ) {
-			self::$notice = array( wp_unslash( $term ), $chosen );
+			self::$notice = array( wp_unslash( $term ), $chosen, $kind );
 		}
 		return array(
 			'term'  => $chosen,
@@ -825,9 +829,15 @@ class ASL_Smart {
 	 */
 	private static function notice_html() {
 		list( $original, $used ) = self::$notice;
+		$kind                    = isset( self::$notice[2] ) ? self::$notice[2] : '';
 		/* translators: 1: term used, 2: what the visitor typed */
 		$text = sprintf( __( 'Showing results for %1$s. Nothing matched %2$s exactly.', 'advanced-search-logger' ), '<strong>' . esc_html( $used ) . '</strong>', '<em>' . esc_html( $original ) . '</em>' );
-		return '<p class="asl-fallback-notice" style="padding:10px 14px;margin:0 0 18px;border-radius:6px;background:rgba(0,115,170,.07);border-inline-start:3px solid #2271b1">' . $text . '</p>';
+		$html = '<p class="asl-fallback-notice" style="padding:10px 14px;margin:0 0 18px;border-radius:6px;background:rgba(0,115,170,.07);border-inline-start:3px solid #2271b1">' . $text . '</p>';
+		// Only close products were found: offer to call back when the exact one is available.
+		if ( 'fewer_words' === $kind && ASL_Settings::on( 'request_enabled' ) && ASL_Settings::on( 'request_on_rescued' ) ) {
+			$html .= ASL_Requests::box_html( $original, true );
+		}
+		return $html;
 	}
 
 	/**

@@ -35,6 +35,8 @@ class ASL_Clicks {
 		add_action( 'woocommerce_checkout_order_created', array( $this, 'on_order_created' ) );
 		add_action( 'woocommerce_store_api_checkout_order_processed', array( $this, 'on_order_created' ) );
 		add_action( 'woocommerce_order_status_changed', array( $this, 'on_order_status_changed' ), 10, 4 );
+		add_action( 'woocommerce_order_refunded', array( $this, 'on_order_refunded' ), 20 );
+		add_action( 'init', array( __CLASS__, 'maybe_resync' ), 99 );
 		add_action( 'woocommerce_admin_order_data_after_order_details', array( $this, 'order_admin_box' ) );
 	}
 
@@ -249,6 +251,21 @@ class ASL_Clicks {
 	}
 
 	/**
+	 * Order statuses whose revenue counts as "revenue from search".
+	 *
+	 * "completed" (default): only delivered orders — reliable for cash-on-delivery shops, where
+	 * WooCommerce marks an order "processing" before any money is received.
+	 * "paid": every status WooCommerce treats as paid (processing + completed).
+	 *
+	 * @return string[]
+	 */
+	public static function counted_statuses() {
+		$mode     = ASL_Settings::get( 'revenue_status', 'completed' );
+		$statuses = 'paid' === $mode && function_exists( 'wc_get_is_paid_statuses' ) ? wc_get_is_paid_statuses() : array( 'completed' );
+		return (array) apply_filters( 'asl_revenue_statuses', $statuses );
+	}
+
+	/**
 	 * At checkout, store which searches led to the products of this order.
 	 *
 	 * @param WC_Order $order Order.
@@ -265,13 +282,11 @@ class ASL_Clicks {
 		$order->save();
 		self::set_cookie( self::CART_COOKIE, '', time() - DAY_IN_SECONDS );
 
-		if ( $order->is_paid() ) {
-			$this->attribute_revenue( $order );
-		}
+		self::sync_order( $order );
 	}
 
 	/**
-	 * When the order is paid, credit its revenue to the searches.
+	 * Order status changed: credit or take back its revenue.
 	 *
 	 * @param int      $order_id Order ID.
 	 * @param string   $from     Old status.
@@ -282,38 +297,80 @@ class ASL_Clicks {
 		if ( ! $order && function_exists( 'wc_get_order' ) ) {
 			$order = wc_get_order( $order_id );
 		}
-		if ( $order && function_exists( 'wc_get_is_paid_statuses' ) && in_array( $to, wc_get_is_paid_statuses(), true ) ) {
-			$this->attribute_revenue( $order );
+		if ( $order ) {
+			self::sync_order( $order );
 		}
 	}
 
 	/**
-	 * Credit revenue once per order.
+	 * Partial refund: credit again with the refunded part removed.
+	 *
+	 * @param int $order_id Order ID.
+	 */
+	public function on_order_refunded( $order_id ) {
+		$order = function_exists( 'wc_get_order' ) ? wc_get_order( $order_id ) : null;
+		if ( $order && $order->get_meta( '_asl_attributed' ) ) {
+			self::uncredit( $order );
+			self::sync_order( $order );
+		}
+	}
+
+	/**
+	 * Run the one-off revenue repair after an update or a settings change.
+	 */
+	public static function maybe_resync() {
+		if ( get_option( 'asl_revenue_resync' ) && function_exists( 'wc_get_order' ) && ! wp_doing_ajax() ) {
+			delete_option( 'asl_revenue_resync' );
+			self::resync_all();
+		}
+	}
+
+	/**
+	 * Make the credited revenue match the order's current status: credit it once when the order
+	 * reaches a counted status, take it back when it is cancelled, failed, refunded...
 	 *
 	 * @param WC_Order $order Order.
 	 */
-	private function attribute_revenue( $order ) {
+	public static function sync_order( $order ) {
 		$pairs = $order->get_meta( '_asl_pairs' );
-		if ( ! is_array( $pairs ) || ! $pairs || $order->get_meta( '_asl_attributed' ) ) {
+		if ( ! is_array( $pairs ) || ! $pairs ) {
 			return;
 		}
+		$counts   = in_array( $order->get_status(), self::counted_statuses(), true );
+		$credited = (bool) $order->get_meta( '_asl_attributed' );
+		if ( $counts && ! $credited ) {
+			self::credit( $order, $pairs );
+		} elseif ( ! $counts && $credited ) {
+			self::uncredit( $order );
+		}
+	}
+
+	/**
+	 * Credit revenue to the searches.
+	 *
+	 * @param WC_Order $order Order.
+	 * @param array    $pairs [log_id, product_id] pairs.
+	 */
+	private static function credit( $order, array $pairs ) {
 		$by_product = array();
 		foreach ( $pairs as $p ) {
 			$by_product[ (int) $p[1] ] = (int) $p[0]; // The latest search for a product wins.
 		}
 		$revenue = array();
-		$terms   = array();
 		foreach ( $order->get_items() as $item ) {
 			$ids = array( (int) $item->get_product_id(), (int) $item->get_variation_id() );
 			foreach ( $ids as $pid ) {
 				if ( $pid && isset( $by_product[ $pid ] ) ) {
-					$log_id               = $by_product[ $pid ];
-					$revenue[ $log_id ]   = ( isset( $revenue[ $log_id ] ) ? $revenue[ $log_id ] : 0 ) + (float) $item->get_total() + (float) $item->get_total_tax();
+					$log_id = $by_product[ $pid ];
+					// Refunded quantities/amounts are excluded.
+					$amount             = (float) $item->get_total() + (float) $item->get_total_tax() - (float) $order->get_total_refunded_for_item( $item->get_id() );
+					$revenue[ $log_id ] = ( isset( $revenue[ $log_id ] ) ? $revenue[ $log_id ] : 0 ) + max( 0, $amount );
 					break;
 				}
 			}
 		}
 		global $wpdb;
+		$terms = array();
 		foreach ( $revenue as $log_id => $amount ) {
 			$wpdb->query( $wpdb->prepare( 'UPDATE ' . asl_table( 'logs' ) . ' SET order_id = %d, revenue = revenue + %f WHERE id = %d', $order->get_id(), $amount, $log_id ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$log = ASL_DB::get_log( $log_id );
@@ -322,10 +379,85 @@ class ASL_Clicks {
 			}
 		}
 		$order->update_meta_data( '_asl_attributed', 1 );
-		$order->update_meta_data( '_asl_search_terms', array_values( array_unique( $terms ) ) );
+		$order->update_meta_data( '_asl_revenue', $revenue ); // Exactly what was credited, so it can be taken back.
+		if ( $terms ) {
+			$order->update_meta_data( '_asl_search_terms', array_values( array_unique( $terms ) ) );
+		}
 		$order->save();
 		ASL_Activator::bump_cache();
 		do_action( 'asl_order_attributed', $order, $revenue );
+	}
+
+	/**
+	 * Take back revenue credited for an order (cancelled, failed, refunded, back to pending...).
+	 *
+	 * @param WC_Order $order Order.
+	 */
+	private static function uncredit( $order ) {
+		global $wpdb;
+		$t       = asl_table( 'logs' );
+		$revenue = $order->get_meta( '_asl_revenue' );
+		if ( is_array( $revenue ) && $revenue ) {
+			foreach ( $revenue as $log_id => $amount ) {
+				$wpdb->query( $wpdb->prepare( "UPDATE $t SET revenue = GREATEST(0, revenue - %f), order_id = IF(order_id = %d, 0, order_id) WHERE id = %d", (float) $amount, $order->get_id(), (int) $log_id ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			}
+		} else {
+			// Credited by version 3.3.1 or older (amounts were not stored): clear the searches linked to this order.
+			$wpdb->query( $wpdb->prepare( "UPDATE $t SET revenue = 0, order_id = 0 WHERE order_id = %d", $order->get_id() ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		}
+		$order->delete_meta_data( '_asl_attributed' );
+		$order->delete_meta_data( '_asl_revenue' );
+		$order->save();
+		ASL_Activator::bump_cache();
+		do_action( 'asl_order_unattributed', $order );
+	}
+
+	/**
+	 * One-off repair: re-check every order that has search revenue against the counted statuses
+	 * (fixes revenue from orders that were later cancelled/failed, or from unpaid COD orders).
+	 *
+	 * @return int Orders corrected.
+	 */
+	public static function resync_all() {
+		if ( ! function_exists( 'wc_get_order' ) ) {
+			return 0;
+		}
+		global $wpdb;
+		$t     = asl_table( 'logs' );
+		$ids   = $wpdb->get_col( "SELECT DISTINCT order_id FROM $t WHERE order_id > 0" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		$fixed = 0;
+		foreach ( $ids as $id ) {
+			$order = wc_get_order( (int) $id );
+			if ( ! $order ) {
+				$wpdb->query( $wpdb->prepare( "UPDATE $t SET revenue = 0, order_id = 0 WHERE order_id = %d", (int) $id ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+				$fixed++;
+				continue;
+			}
+			$before = (bool) $order->get_meta( '_asl_attributed' );
+			self::sync_order( $order );
+			if ( $before !== (bool) $order->get_meta( '_asl_attributed' ) ) {
+				$fixed++;
+			}
+		}
+		// Orders with search pairs that were never credited but now count (e.g. switched to "paid" mode).
+		if ( function_exists( 'wc_get_orders' ) ) {
+			$orders = wc_get_orders(
+				array(
+					'limit'      => 500,
+					'status'     => self::counted_statuses(),
+					'meta_key'   => '_asl_pairs', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+					'date_after' => gmdate( 'Y-m-d', time() - 400 * DAY_IN_SECONDS ),
+				)
+			);
+			foreach ( $orders as $order ) {
+				if ( ! $order->get_meta( '_asl_attributed' ) ) {
+					self::sync_order( $order );
+					$fixed++;
+				}
+			}
+		}
+		ASL_Activator::bump_cache();
+		return $fixed;
 	}
 
 	/**

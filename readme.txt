@@ -4,7 +4,7 @@ Tags: search analytics, search log, woocommerce search, synonyms, search redirec
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.2.1
+Stable tag: 3.3.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,6 +60,23 @@ Add the CSS class of the dropdown under Settings → Clicks & conversions → Ex
 No. One small insert per search, a cached rule lookup and a 1.5 KB script without dependencies.
 
 == Changelog ==
+
+= 3.3.3 =
+* Tweak: the currency on the revenue tile is shown smaller under the amount instead of being cut off.
+
+= 3.3.2 =
+* Fix: "Revenue from search" included orders that were later cancelled, failed or refunded (common with cash on delivery). Revenue is now taken back when an order leaves a counted status, partial refunds are subtracted, and existing data is re-checked once after the update.
+* New: setting "Count revenue when the order is": Completed only (default) or Processing + completed.
+* Fix: the revenue tile no longer overflows; large amounts are shown as "۲٫۷ میلیارد تومان" with the exact amount on hover.
+
+= 3.3.1 =
+* Fix: some server firewalls (LiteSpeed/ModSecurity) blocked the request form with a 403 because it posted the page URL. The URL is now rebuilt on the server.
+
+= 3.3.0 =
+* New: product requests. When a search finds nothing, visitors see a "not available – leave your number and our experts will call you" box (replaces WooCommerce's "No products were found"). Also offered as a one-line box above close matches.
+* New: WebiSearch → Product requests: statuses (new / contacted / done / canceled), notes, filter by product or phone, "most requested products", CSV export, and an e-mail for each new request.
+* New: request count shown next to each term in the failed-searches review; "found on the site now" hint when a requested product becomes available.
+* New: [webisearch_request_form] shortcode and asl_request_created action (for SMS / CRM).
 
 = 3.2.1 =
 * FIX: A missing madda is added before searching when the catalog clearly uses آ ("تانکر اب" → "تانکر آب").

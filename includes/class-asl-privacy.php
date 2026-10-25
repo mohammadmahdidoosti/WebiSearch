@@ -79,6 +79,31 @@ class ASL_Privacy {
 				);
 			}
 			$done = count( $rows ) < 500;
+			if ( 1 === (int) $page ) {
+				global $wpdb;
+				$reqs = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM ' . asl_table( 'requests' ) . ' WHERE user_id = %d', $user->ID ), ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+				foreach ( (array) $reqs as $req ) {
+					$data[] = array(
+						'group_id'    => 'webisearch-requests',
+						'group_label' => __( 'Product requests', 'advanced-search-logger' ),
+						'item_id'     => 'asl-req-' . $req['id'],
+						'data'        => array(
+							array(
+								'name'  => __( 'Product searched', 'advanced-search-logger' ),
+								'value' => $req['term'],
+							),
+							array(
+								'name'  => __( 'Phone', 'advanced-search-logger' ),
+								'value' => $req['phone'],
+							),
+							array(
+								'name'  => __( 'Date', 'advanced-search-logger' ),
+								'value' => $req['created'],
+							),
+						),
+					);
+				}
+			}
 		}
 		return array(
 			'data' => $data,
@@ -98,6 +123,7 @@ class ASL_Privacy {
 		$removed = 0;
 		if ( $user ) {
 			$removed = (int) $wpdb->query( $wpdb->prepare( 'DELETE FROM ' . asl_table( 'logs' ) . ' WHERE user_id = %d', $user->ID ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			$removed += (int) $wpdb->query( $wpdb->prepare( 'DELETE FROM ' . asl_table( 'requests' ) . ' WHERE user_id = %d', $user->ID ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			ASL_Activator::bump_cache();
 		}
 		return array(
@@ -118,6 +144,7 @@ class ASL_Privacy {
 		wp_add_privacy_policy_content(
 			'WebiSearch',
 			'<p>' . esc_html__( 'When you use the search on this site we record the words you searched for, the number of results, which result you clicked and, for logged-in customers, your user account. We do not store your IP address; an anonymous, one-way identifier is used to count unique searchers. A first-party cookie (asl_sid, 1 hour) links a search to the result you open, and a second cookie (asl_cart, 7 days) links it to products you buy. This data is used only to improve our search and catalogue and is deleted automatically after a limited period.', 'advanced-search-logger' ) . '</p>'
+				. '<p>' . esc_html__( 'If a product you searched for is not available and you leave your phone number (and optionally your name), we store it with the product you searched for so our staff can call you when it becomes available. You can ask us to delete it at any time.', 'advanced-search-logger' ) . '</p>'
 		);
 	}
 }

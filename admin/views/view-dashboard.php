@@ -171,7 +171,7 @@ if ( $k['total'] > 0 ) {
 		<?php if ( $woo ) : ?>
 		<div class="asl-kpi is-money">
 			<span class="asl-kpi__label"><?php esc_html_e( 'Revenue from search', 'advanced-search-logger' ); ?></span>
-			<strong class="asl-kpi__value"><?php echo wp_kses_post( wc_price( $k['revenue'] ) ); ?></strong>
+			<strong class="asl-kpi__value" title="<?php echo esc_attr( wp_strip_all_tags( html_entity_decode( wc_price( $k['revenue'] ) ) ) ); ?>"><?php $asl_money = asl_compact_money_parts( $k['revenue'] ); echo esc_html( $asl_money[0] ); ?> <small class="asl-kpi__unit"><?php echo esc_html( $asl_money[1] ); ?></small></strong>
 			<span class="asl-delta asl-muted">
 			<?php
 			/* translators: 1: carts, 2: orders */

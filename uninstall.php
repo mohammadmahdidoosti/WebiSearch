@@ -19,7 +19,7 @@ if ( defined( 'ASL_KEEP_DATA_ON_UNINSTALL' ) && ASL_KEEP_DATA_ON_UNINSTALL ) {
  */
 function asl_uninstall_site() {
 	global $wpdb;
-	foreach ( array( 'asl_search_logs', 'asl_synonyms', 'asl_clicks' ) as $t ) {
+	foreach ( array( 'asl_search_logs', 'asl_synonyms', 'asl_clicks', 'asl_requests' ) as $t ) {
 		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}{$t}" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 	}
 	foreach ( array( 'asl_settings', 'asl_db_version', 'asl_cache_ver', 'asl_tracking_since', 'asl_resolved_terms', 'asl_backfill_pending', 'asl_vocab', 'asl_vocab_ver', 'asl_vocab_digits', 'asl_vocab_docs', 'asl_review', 'asl_review_queue' ) as $o ) {

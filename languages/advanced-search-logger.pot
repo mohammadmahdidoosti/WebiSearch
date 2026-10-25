@@ -2,17 +2,17 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WebiSearch 3.2.1\n"
+"Project-Id-Version: WebiSearch 3.3.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/WebiSearch\n"
+"POT-Creation-Date: 2026-10-14T06:17:16+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-14T06:17:16+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: advanced-search-logger\n"
+"X-Generator: WP-CLI 2.12.0\n"
 
 #. Plugin Name of the plugin
 #: advanced-search-logger.php
@@ -27,7 +27,10 @@ msgstr ""
 
 #. Description of the plugin
 #: advanced-search-logger.php
-msgid "Search analytics for any WordPress site: logs standard, AJAX and live searches, measures result clicks and WooCommerce conversions, finds failed searches and fixes them with synonyms and redirects."
+msgid ""
+"Search analytics for any WordPress site: logs standard, AJAX and live "
+"searches, measures result clicks and WooCommerce conversions, finds failed "
+"searches and fixes them with synonyms and redirects."
 msgstr ""
 
 #. Author of the plugin
@@ -39,18 +42,15 @@ msgstr ""
 msgid "Search Logger"
 msgstr ""
 
-#: admin/class-asl-admin.php:58
-#: admin/views/view-dashboard.php:121
+#: admin/class-asl-admin.php:58 admin/views/view-dashboard.php:121
 msgid "Search Analytics Dashboard"
 msgstr ""
 
-#: admin/class-asl-admin.php:58
-#: admin/class-asl-admin.php:108
+#: admin/class-asl-admin.php:58 admin/class-asl-admin.php:108
 msgid "Dashboard"
 msgstr ""
 
-#: admin/class-asl-admin.php:59
-#: admin/views/view-review.php:27
+#: admin/class-asl-admin.php:59 admin/views/view-review.php:27
 msgid "Failed searches review"
 msgstr ""
 
@@ -58,8 +58,7 @@ msgstr ""
 msgid "Failed searches"
 msgstr ""
 
-#: admin/class-asl-admin.php:60
-#: admin/views/view-logs-page.php:25
+#: admin/class-asl-admin.php:60 admin/views/view-logs-page.php:25
 msgid "All Search Logs"
 msgstr ""
 
@@ -67,18 +66,15 @@ msgstr ""
 msgid "All Logs"
 msgstr ""
 
-#: admin/class-asl-admin.php:61
-#: admin/views/view-synonyms.php:26
+#: admin/class-asl-admin.php:61 admin/views/view-synonyms.php:26
 msgid "Synonyms & Redirects"
 msgstr ""
 
-#: admin/class-asl-admin.php:62
-#: admin/views/view-settings.php:13
+#: admin/class-asl-admin.php:62 admin/views/view-settings.php:13
 msgid "Search Logger Settings"
 msgstr ""
 
-#: admin/class-asl-admin.php:62
-#: admin/class-asl-admin.php:109
+#: admin/class-asl-admin.php:62 admin/class-asl-admin.php:109
 msgid "Settings"
 msgstr ""
 
@@ -134,8 +130,7 @@ msgstr ""
 msgid "Please enter a valid URL (https://...) or a path starting with /."
 msgstr ""
 
-#: admin/class-asl-admin.php:226
-#: includes/class-asl-db.php:677
+#: admin/class-asl-admin.php:226 includes/class-asl-db.php:677
 msgid "Both the search term and the target are required."
 msgstr ""
 
@@ -159,20 +154,15 @@ msgstr ""
 msgid "Done. Reloading…"
 msgstr ""
 
-#: admin/class-asl-admin.php:472
-#: admin/class-asl-admin.php:737
-#: admin/class-asl-export.php:186
-#: admin/class-asl-export.php:225
+#: admin/class-asl-admin.php:472 admin/class-asl-admin.php:737
+#: admin/class-asl-export.php:186 admin/class-asl-export.php:225
 #: admin/class-asl-synonyms-list-table.php:106
-#: admin/class-asl-terms-list-table.php:46
-#: admin/views/view-dashboard.php:138
-#: admin/views/view-dashboard.php:286
-#: includes/class-asl-reports.php:65
+#: admin/class-asl-terms-list-table.php:46 admin/views/view-dashboard.php:138
+#: admin/views/view-dashboard.php:286 includes/class-asl-reports.php:65
 msgid "Searches"
 msgstr ""
 
-#: admin/class-asl-admin.php:473
-#: admin/class-asl-admin.php:738
+#: admin/class-asl-admin.php:473 admin/class-asl-admin.php:738
 #: admin/class-asl-terms-list-table.php:48
 msgid "No results"
 msgstr ""
@@ -181,8 +171,7 @@ msgstr ""
 msgid "Hour of day"
 msgstr ""
 
-#: admin/class-asl-admin.php:475
-#: admin/views/view-dashboard.php:281
+#: admin/class-asl-admin.php:475 admin/views/view-dashboard.php:281
 msgid "No data for this period yet."
 msgstr ""
 
@@ -207,7 +196,11 @@ msgid "Merge repeated & as-you-type searches (seconds)"
 msgstr ""
 
 #: admin/class-asl-admin.php:535
-msgid "Live search fires a request for almost every key press. Within this window, the same visitor's keystrokes (\"پم\", \"پمپ\", \"پمپ آب\") are stored as one search with the final term, and reloading the same search is counted once. 0 = off."
+msgid ""
+"Live search fires a request for almost every key press. Within this window, "
+"the same visitor's keystrokes (\"پم\", \"پمپ\", \"پمپ آب\") are stored as "
+"one search with the final term, and reloading the same search is counted "
+"once. 0 = off."
 msgstr ""
 
 #: admin/class-asl-admin.php:536
@@ -227,7 +220,9 @@ msgid "Ignore spam searches"
 msgstr ""
 
 #: admin/class-asl-admin.php:538
-msgid "Searches containing links, e-mail addresses, code or very long random strings."
+msgid ""
+"Searches containing links, e-mail addresses, code or very long random "
+"strings."
 msgstr ""
 
 #: admin/class-asl-admin.php:539
@@ -259,7 +254,9 @@ msgstr ""
 
 #. translators: %s: IP
 #: admin/class-asl-admin.php:541
-msgid "For headless sites and apps using /wp-json/. Off by default because editors also search through the REST API."
+msgid ""
+"For headless sites and apps using /wp-json/. Off by default because editors "
+"also search through the REST API."
 msgstr ""
 
 #: admin/class-asl-admin.php:543
@@ -271,7 +268,10 @@ msgid "Fix Arabic characters in searches"
 msgstr ""
 
 #: admin/class-asl-admin.php:544
-msgid "Converts Arabic ي and ك to Persian ی and ک and removes tatweel, diacritics and invisible characters before searching. Visitors with Arabic keyboards will find your products instead of getting \"nothing found\"."
+msgid ""
+"Converts Arabic ي and ك to Persian ی and ک and removes tatweel, diacritics "
+"and invisible characters before searching. Visitors with Arabic keyboards "
+"will find your products instead of getting \"nothing found\"."
 msgstr ""
 
 #: admin/class-asl-admin.php:545
@@ -279,7 +279,10 @@ msgid "Match any spelling of Persian letters and digits"
 msgstr ""
 
 #: admin/class-asl-admin.php:545
-msgid "A search for \"سایز 63\" also finds titles written as \"سايز ۶۳\" (Arabic ي/ك, Persian or Latin digits, half-space or space). Recommended: product titles are often typed with different keyboards."
+msgid ""
+"A search for \"سایز 63\" also finds titles written as \"سايز ۶۳\" (Arabic "
+"ي/ك, Persian or Latin digits, half-space or space). Recommended: product "
+"titles are often typed with different keyboards."
 msgstr ""
 
 #: admin/class-asl-admin.php:546
@@ -287,7 +290,10 @@ msgid "Search in"
 msgstr ""
 
 #: admin/class-asl-admin.php:546
-msgid "WordPress also searches the full description, so a product whose description merely mentions a word (\"…can be used with a tank\") appears for that word. Title only gives cleaner results for shops with descriptive titles."
+msgid ""
+"WordPress also searches the full description, so a product whose description"
+" merely mentions a word (\"…can be used with a tank\") appears for that "
+"word. Title only gives cleaner results for shops with descriptive titles."
 msgstr ""
 
 #: admin/class-asl-admin.php:547
@@ -295,7 +301,12 @@ msgid "Rescue searches that find nothing"
 msgstr ""
 
 #: admin/class-asl-admin.php:547
-msgid "Only when a search returns zero results: separates numbers glued to words (مغزی1/2), removes text pasted from product pages, corrects words that do not exist in your product titles (missing آ, typos, words written together) and, if needed, searches with fewer words. Searches that already work are never changed."
+msgid ""
+"Only when a search returns zero results: separates numbers glued to words "
+"(مغزی1/2), removes text pasted from product pages, corrects words that do "
+"not exist in your product titles (missing آ, typos, words written together) "
+"and, if needed, searches with fewer words. Searches that already work are "
+"never changed."
 msgstr ""
 
 #: admin/class-asl-admin.php:548
@@ -311,7 +322,10 @@ msgid "Help on empty result pages"
 msgstr ""
 
 #: admin/class-asl-admin.php:549
-msgid "When nothing is found even after the rescue, WooCommerce result pages show popular searches and the text below. For other themes use the [webisearch_no_results] shortcode."
+msgid ""
+"When nothing is found even after the rescue, WooCommerce result pages show "
+"popular searches and the text below. For other themes use the "
+"[webisearch_no_results] shortcode."
 msgstr ""
 
 #: admin/class-asl-admin.php:550
@@ -319,7 +333,9 @@ msgid "Text for empty result pages"
 msgstr ""
 
 #: admin/class-asl-admin.php:550
-msgid "Optional. Example: Didn't find it? Call us on 021-… or message us on WhatsApp — we probably have it."
+msgid ""
+"Optional. Example: Didn't find it? Call us on 021-… or message us on "
+"WhatsApp — we probably have it."
 msgstr ""
 
 #: admin/class-asl-admin.php:551
@@ -327,7 +343,10 @@ msgid "Do not cache search result pages"
 msgstr ""
 
 #: admin/class-asl-admin.php:551
-msgid "Page caches (LiteSpeed, WP Rocket, W3 Total Cache...) serve cached search pages without running WordPress, so those searches would be missing from the logs."
+msgid ""
+"Page caches (LiteSpeed, WP Rocket, W3 Total Cache...) serve cached search "
+"pages without running WordPress, so those searches would be missing from the"
+" logs."
 msgstr ""
 
 #: admin/class-asl-admin.php:553
@@ -339,7 +358,9 @@ msgid "Track clicks on search results"
 msgstr ""
 
 #: admin/class-asl-admin.php:554
-msgid "Measures click-through rate and click position for the results page and for live search dropdowns."
+msgid ""
+"Measures click-through rate and click position for the results page and for "
+"live search dropdowns."
 msgstr ""
 
 #: admin/class-asl-admin.php:555
@@ -351,7 +372,9 @@ msgid "Extra live-search CSS selectors"
 msgstr ""
 
 #: admin/class-asl-admin.php:556
-msgid "Only needed if clicks in your theme's live search dropdown are not counted. One CSS selector per line, e.g. .my-search-dropdown"
+msgid ""
+"Only needed if clicks in your theme's live search dropdown are not counted. "
+"One CSS selector per line, e.g. .my-search-dropdown"
 msgstr ""
 
 #: admin/class-asl-admin.php:558
@@ -363,7 +386,8 @@ msgid "Link searches to logged-in users"
 msgstr ""
 
 #: admin/class-asl-admin.php:559
-msgid "When off, every search is stored anonymously. IP addresses are never stored."
+msgid ""
+"When off, every search is stored anonymously. IP addresses are never stored."
 msgstr ""
 
 #: admin/class-asl-admin.php:560
@@ -411,7 +435,10 @@ msgid "Placeholders:"
 msgstr ""
 
 #: admin/class-asl-admin.php:574
-msgid "A small script (about 1.5 KB, no jQuery) records which result a visitor opens after searching. WooCommerce add-to-cart and paid orders are credited to the search that led to them."
+msgid ""
+"A small script (about 1.5 KB, no jQuery) records which result a visitor "
+"opens after searching. WooCommerce add-to-cart and paid orders are credited "
+"to the search that led to them."
 msgstr ""
 
 #: admin/class-asl-admin.php:614
@@ -434,8 +461,7 @@ msgstr ""
 msgid "Site search (last 7 days)"
 msgstr ""
 
-#: admin/class-asl-admin.php:739
-#: admin/class-asl-terms-list-table.php:50
+#: admin/class-asl-admin.php:739 admin/class-asl-terms-list-table.php:50
 #: admin/views/view-dashboard.php:289
 msgid "CTR"
 msgstr ""
@@ -460,10 +486,8 @@ msgstr ""
 msgid "You do not have permission to export."
 msgstr ""
 
-#: admin/class-asl-export.php:111
-#: admin/class-asl-export.php:185
-#: admin/class-asl-export.php:225
-#: includes/class-asl-privacy.php:71
+#: admin/class-asl-export.php:111 admin/class-asl-export.php:185
+#: admin/class-asl-export.php:225 includes/class-asl-privacy.php:71
 msgid "Search term"
 msgstr ""
 
@@ -475,20 +499,17 @@ msgstr ""
 msgid "Searched as (synonym/redirect)"
 msgstr ""
 
-#: admin/class-asl-export.php:114
-#: admin/class-asl-logs-list-table.php:259
+#: admin/class-asl-export.php:114 admin/class-asl-logs-list-table.php:259
 #: admin/views/view-dashboard.php:154
 msgid "Rescued automatically"
 msgstr ""
 
-#: admin/class-asl-export.php:115
-#: admin/class-asl-export.php:225
+#: admin/class-asl-export.php:115 admin/class-asl-export.php:225
 #: admin/class-asl-logs-list-table.php:47
 msgid "Results"
 msgstr ""
 
-#: admin/class-asl-export.php:116
-#: admin/class-asl-logs-list-table.php:49
+#: admin/class-asl-export.php:116 admin/class-asl-logs-list-table.php:49
 msgid "Source"
 msgstr ""
 
@@ -496,13 +517,11 @@ msgstr ""
 msgid "Post type"
 msgstr ""
 
-#: admin/class-asl-export.php:118
-#: admin/class-asl-logs-list-table.php:50
+#: admin/class-asl-export.php:118 admin/class-asl-logs-list-table.php:50
 msgid "User"
 msgstr ""
 
-#: admin/class-asl-export.php:119
-#: admin/class-asl-logs-list-table.php:51
+#: admin/class-asl-export.php:119 admin/class-asl-logs-list-table.php:51
 #: includes/class-asl-privacy.php:75
 msgid "Date"
 msgstr ""
@@ -511,8 +530,7 @@ msgstr ""
 msgid "Date (Jalali)"
 msgstr ""
 
-#: admin/class-asl-export.php:124
-#: admin/class-asl-logs-list-table.php:48
+#: admin/class-asl-export.php:124 admin/class-asl-logs-list-table.php:48
 #: admin/views/view-dashboard.php:322
 msgid "Clicks"
 msgstr ""
@@ -521,8 +539,7 @@ msgstr ""
 msgid "First click position"
 msgstr ""
 
-#: admin/class-asl-export.php:127
-#: admin/class-asl-export.php:194
+#: admin/class-asl-export.php:127 admin/class-asl-export.php:194
 msgid "Add to cart"
 msgstr ""
 
@@ -530,32 +547,25 @@ msgstr ""
 msgid "Order ID"
 msgstr ""
 
-#: admin/class-asl-export.php:129
-#: admin/class-asl-export.php:195
-#: admin/class-asl-terms-list-table.php:51
-#: admin/views/view-dashboard.php:292
+#: admin/class-asl-export.php:129 admin/class-asl-export.php:195
+#: admin/class-asl-terms-list-table.php:51 admin/views/view-dashboard.php:292
 msgid "Revenue"
 msgstr ""
 
-#: admin/class-asl-export.php:152
-#: admin/class-asl-logs-list-table.php:127
+#: admin/class-asl-export.php:152 admin/class-asl-logs-list-table.php:127
 msgid "Guest"
 msgstr ""
 
-#: admin/class-asl-export.php:187
-#: admin/class-asl-terms-list-table.php:47
-#: admin/views/view-dashboard.php:143
-#: includes/class-asl-reports.php:66
+#: admin/class-asl-export.php:187 admin/class-asl-terms-list-table.php:47
+#: admin/views/view-dashboard.php:143 includes/class-asl-reports.php:66
 msgid "Unique searchers"
 msgstr ""
 
-#: admin/class-asl-export.php:188
-#: admin/views/view-dashboard.php:209
+#: admin/class-asl-export.php:188 admin/views/view-dashboard.php:209
 msgid "Searches with no results"
 msgstr ""
 
-#: admin/class-asl-export.php:189
-#: admin/class-asl-terms-list-table.php:49
+#: admin/class-asl-export.php:189 admin/class-asl-terms-list-table.php:49
 msgid "Average results"
 msgstr ""
 
@@ -567,35 +577,28 @@ msgstr ""
 msgid "CTR %"
 msgstr ""
 
-#: admin/class-asl-export.php:197
-#: admin/class-asl-export.php:225
-#: admin/class-asl-terms-list-table.php:52
-#: admin/views/view-review.php:86
+#: admin/class-asl-export.php:197 admin/class-asl-export.php:225
+#: admin/class-asl-terms-list-table.php:52 admin/views/view-review.php:86
 msgid "Last searched"
 msgstr ""
 
-#: admin/class-asl-export.php:219
-#: admin/views/view-review.php:17
+#: admin/class-asl-export.php:219 admin/views/view-review.php:17
 msgid "Not in your catalog"
 msgstr ""
 
-#: admin/class-asl-export.php:220
-#: admin/views/view-review.php:18
+#: admin/class-asl-export.php:220 admin/views/view-review.php:18
 msgid "Close matches"
 msgstr ""
 
-#: admin/class-asl-export.php:221
-#: admin/views/view-review.php:19
+#: admin/class-asl-export.php:221 admin/views/view-review.php:19
 msgid "Fixed automatically"
 msgstr ""
 
-#: admin/class-asl-export.php:222
-#: admin/views/view-review.php:20
+#: admin/class-asl-export.php:222 admin/views/view-review.php:20
 msgid "Found now"
 msgstr ""
 
-#: admin/class-asl-export.php:223
-#: admin/views/view-review.php:21
+#: admin/class-asl-export.php:223 admin/views/view-review.php:21
 msgid "Ignored"
 msgstr ""
 
@@ -603,17 +606,14 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: admin/class-asl-export.php:225
-#: admin/views/view-review.php:84
+#: admin/class-asl-export.php:225 admin/views/view-review.php:84
 msgid "What they see now"
 msgstr ""
 
 #: admin/class-asl-logs-list-table.php:46
 #: admin/class-asl-synonyms-list-table.php:38
-#: admin/class-asl-terms-list-table.php:45
-#: admin/views/view-dashboard.php:217
-#: admin/views/view-dashboard.php:258
-#: admin/views/view-dashboard.php:285
+#: admin/class-asl-terms-list-table.php:45 admin/views/view-dashboard.php:217
+#: admin/views/view-dashboard.php:258 admin/views/view-dashboard.php:285
 msgid "Search Term"
 msgstr ""
 
@@ -634,18 +634,14 @@ msgid "View all for this term"
 msgstr ""
 
 #: admin/class-asl-logs-list-table.php:110
-#: admin/class-asl-terms-list-table.php:105
-#: admin/views/view-dashboard.php:232
-#: admin/views/view-logs-page.php:38
-#: admin/views/view-review.php:112
+#: admin/class-asl-terms-list-table.php:105 admin/views/view-dashboard.php:232
+#: admin/views/view-logs-page.php:38 admin/views/view-review.php:112
 msgid "Add rule"
 msgstr ""
 
 #: admin/class-asl-logs-list-table.php:111
-#: admin/class-asl-terms-list-table.php:106
-#: admin/views/view-dashboard.php:235
-#: admin/views/view-logs-page.php:39
-#: admin/views/view-review.php:122
+#: admin/class-asl-terms-list-table.php:106 admin/views/view-dashboard.php:235
+#: admin/views/view-logs-page.php:39 admin/views/view-review.php:122
 msgid "Try on site"
 msgstr ""
 
@@ -784,7 +780,9 @@ msgid "Starts with"
 msgstr ""
 
 #: admin/class-asl-synonyms-list-table.php:224
-msgid "No rules yet. Start with the searches that returned nothing on the dashboard."
+msgid ""
+"No rules yet. Start with the searches that returned nothing on the "
+"dashboard."
 msgstr ""
 
 #: admin/class-asl-synonyms-list-table.php:239
@@ -829,8 +827,7 @@ msgstr ""
 msgid "pts"
 msgstr ""
 
-#: admin/views/view-dashboard.php:43
-#: admin/views/view-dashboard.php:265
+#: admin/views/view-dashboard.php:43 admin/views/view-dashboard.php:265
 msgid "new"
 msgstr ""
 
@@ -841,21 +838,30 @@ msgstr ""
 #. translators: 1: percent, 2: search term
 #: admin/views/view-dashboard.php:62
 #, php-format
-msgid "%1$s%% of searches find nothing. The most common one is \"%2$s\" — add a synonym or the missing product."
+msgid ""
+"%1$s%% of searches find nothing. The most common one is \"%2$s\" — add a "
+"synonym or the missing product."
 msgstr ""
 
 #. translators: 1: number of terms, 2: failed term, 3: suggestion
 #: admin/views/view-dashboard.php:76
 #, php-format
-msgid "%1$s failed search looks like a typo of a successful one (e.g. \"%2$s\" → \"%3$s\"). One click creates the synonym."
-msgid_plural "%1$s failed searches look like typos of successful ones (e.g. \"%2$s\" → \"%3$s\"). One click creates the synonym."
+msgid ""
+"%1$s failed search looks like a typo of a successful one (e.g. \"%2$s\" → "
+"\"%3$s\"). One click creates the synonym."
+msgid_plural ""
+"%1$s failed searches look like typos of successful ones (e.g. \"%2$s\" → "
+"\"%3$s\"). One click creates the synonym."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: 1: term, 2: searches, 3: CTR
 #: admin/views/view-dashboard.php:87
 #, php-format
-msgid "\"%1$s\" was searched %2$s times and returns results, but only %3$s%% of searchers clicked one. Check that the best product appears first and that titles/images match what people expect."
+msgid ""
+"\"%1$s\" was searched %2$s times and returns results, but only %3$s%% of "
+"searchers clicked one. Check that the best product appears first and that "
+"titles/images match what people expect."
 msgstr ""
 
 #. translators: 1: term, 2: count
@@ -867,17 +873,23 @@ msgstr ""
 #. translators: 1: term, 2: growth percent
 #: admin/views/view-dashboard.php:101
 #, php-format
-msgid "Interest in \"%1$s\" grew %2$s%% compared with the previous period. Consider featuring it on the home page."
+msgid ""
+"Interest in \"%1$s\" grew %2$s%% compared with the previous period. Consider"
+" featuring it on the home page."
 msgstr ""
 
 #. translators: %s: average position
 #: admin/views/view-dashboard.php:108
 #, php-format
-msgid "On average visitors click result #%s. The most relevant results are not at the top; synonyms and better product titles help."
+msgid ""
+"On average visitors click result #%s. The most relevant results are not at "
+"the top; synonyms and better product titles help."
 msgstr ""
 
 #: admin/views/view-dashboard.php:114
-msgid "No result clicks have been recorded yet. If your theme uses a custom live search, add its dropdown CSS class under Settings → Clicks & conversions."
+msgid ""
+"No result clicks have been recorded yet. If your theme uses a custom live "
+"search, add its dropdown CSS class under Settings → Clicks & conversions."
 msgstr ""
 
 #: admin/views/view-dashboard.php:122
@@ -890,8 +902,7 @@ msgstr ""
 msgid "From %1$s to %2$s, compared with the previous %3$s."
 msgstr ""
 
-#: admin/views/view-dashboard.php:148
-#: includes/class-asl-reports.php:67
+#: admin/views/view-dashboard.php:148 includes/class-asl-reports.php:67
 msgid "No-result rate"
 msgstr ""
 
@@ -899,8 +910,7 @@ msgstr ""
 msgid "searches that would have found nothing"
 msgstr ""
 
-#: admin/views/view-dashboard.php:161
-#: includes/class-asl-reports.php:68
+#: admin/views/view-dashboard.php:161 includes/class-asl-reports.php:68
 msgid "Click-through rate"
 msgstr ""
 
@@ -912,8 +922,7 @@ msgstr ""
 msgid "lower is better"
 msgstr ""
 
-#: admin/views/view-dashboard.php:173
-#: includes/class-asl-reports.php:70
+#: admin/views/view-dashboard.php:173 includes/class-asl-reports.php:70
 msgid "Revenue from search"
 msgstr ""
 
@@ -940,15 +949,16 @@ msgid "Full review"
 msgstr ""
 
 #: admin/views/view-dashboard.php:212
-msgid "Each one is a visitor who wanted something and found nothing. Fix them with a synonym, a redirect or by adding the product."
+msgid ""
+"Each one is a visitor who wanted something and found nothing. Fix them with "
+"a synonym, a redirect or by adding the product."
 msgstr ""
 
 #: admin/views/view-dashboard.php:214
 msgid "No failed searches in this period."
 msgstr ""
 
-#: admin/views/view-dashboard.php:217
-#: admin/views/view-review.php:82
+#: admin/views/view-dashboard.php:217 admin/views/view-review.php:82
 msgid "Times"
 msgstr ""
 
@@ -980,8 +990,7 @@ msgstr ""
 msgid "See all"
 msgstr ""
 
-#: admin/views/view-dashboard.php:253
-#: includes/class-asl-settings.php:139
+#: admin/views/view-dashboard.php:253 includes/class-asl-settings.php:139
 msgid "Trending searches"
 msgstr ""
 
@@ -1074,7 +1083,8 @@ msgid "Search Terms"
 msgstr ""
 
 #: admin/views/view-logs-page.php:61
-msgid "Are you sure you want to delete ALL search logs? This cannot be undone."
+msgid ""
+"Are you sure you want to delete ALL search logs? This cannot be undone."
 msgstr ""
 
 #: admin/views/view-logs-page.php:66
@@ -1092,19 +1102,28 @@ msgid "Logs are kept forever."
 msgstr ""
 
 #: admin/views/view-review.php:17
-msgid "Even with automatic fixes nothing matches. This is the list of products people want that you do not sell (or that are named differently)."
+msgid ""
+"Even with automatic fixes nothing matches. This is the list of products "
+"people want that you do not sell (or that are named differently)."
 msgstr ""
 
 #: admin/views/view-review.php:18
-msgid "The exact product is not found, so visitors now see related products (found with fewer words). Check them: add a precise rule, or mark as \"we don't have it\"."
+msgid ""
+"The exact product is not found, so visitors now see related products (found "
+"with fewer words). Check them: add a precise rule, or mark as \"we don't "
+"have it\"."
 msgstr ""
 
 #: admin/views/view-review.php:19
-msgid "Typos, missing آ, glued numbers or pasted text. Visitors now get the right products automatically."
+msgid ""
+"Typos, missing آ, glued numbers or pasted text. Visitors now get the right "
+"products automatically."
 msgstr ""
 
 #: admin/views/view-review.php:20
-msgid "These find products today without any fix (a product was added, a rule exists, or Arabic/Persian letters and digits are matched)."
+msgid ""
+"These find products today without any fix (a product was added, a rule "
+"exists, or Arabic/Persian letters and digits are matched)."
 msgstr ""
 
 #: admin/views/view-review.php:21
@@ -1120,7 +1139,10 @@ msgid "Export this list (CSV)"
 msgstr ""
 
 #: admin/views/view-review.php:34
-msgid "Every search that ever found nothing is tested again against today's products, rules and automatic fixes. This runs by itself every night; use the button after adding products."
+msgid ""
+"Every search that ever found nothing is tested again against today's "
+"products, rules and automatic fixes. This runs by itself every night; use "
+"the button after adding products."
 msgstr ""
 
 #. translators: %s: date
@@ -1154,8 +1176,7 @@ msgid "What visitors searched"
 msgstr ""
 
 #. translators: %s: number of results
-#: admin/views/view-review.php:102
-#: admin/views/view-synonyms.php:103
+#: admin/views/view-review.php:102 admin/views/view-synonyms.php:103
 #, php-format
 msgid "%s result"
 msgid_plural "%s results"
@@ -1237,7 +1258,10 @@ msgid "When a visitor searches for"
 msgstr ""
 
 #: admin/views/view-synonyms.php:45
-msgid "You can enter several spellings at once, separated by commas or new lines (e.g. هودی، هودي، hoodie). Persian/Arabic letters, digits and half-spaces are matched automatically."
+msgid ""
+"You can enter several spellings at once, separated by commas or new lines "
+"(e.g. هودی، هودي، hoodie). Persian/Arabic letters, digits and half-spaces "
+"are matched automatically."
 msgstr ""
 
 #: admin/views/view-synonyms.php:50
@@ -1273,11 +1297,17 @@ msgid "Target"
 msgstr ""
 
 #: admin/views/view-synonyms.php:69
-msgid "Synonym: the term that should be searched instead. With \"contains\", only the matched word is replaced."
+msgid ""
+"Synonym: the term that should be searched instead. With \"contains\", only "
+"the matched word is replaced."
 msgstr ""
 
 #: admin/views/view-synonyms.php:70
-msgid "Redirect: a full URL or a path like /product-category/pumps/. Persian URLs are fine. Use {query} to pass the search on, e.g. /shop/?s={query}. Live search dropdowns keep showing normal results; the redirect happens when Enter is pressed."
+msgid ""
+"Redirect: a full URL or a path like /product-category/pumps/. Persian URLs "
+"are fine. Use {query} to pass the search on, e.g. /shop/?s={query}. Live "
+"search dropdowns keep showing normal results; the redirect happens when "
+"Enter is pressed."
 msgstr ""
 
 #: admin/views/view-synonyms.php:74
@@ -1301,7 +1331,9 @@ msgid "Test a search"
 msgstr ""
 
 #: admin/views/view-synonyms.php:87
-msgid "See what your site does with a search: rules, the normal result and, if it finds nothing, the automatic fixes."
+msgid ""
+"See what your site does with a search: rules, the normal result and, if it "
+"finds nothing, the automatic fixes."
 msgstr ""
 
 #: admin/views/view-synonyms.php:90
@@ -1321,7 +1353,10 @@ msgid "Import rules"
 msgstr ""
 
 #: admin/views/view-synonyms.php:121
-msgid "CSV columns: term, type (synonym/redirect), match_type (exact/contains/starts), target, status. A simple two-column file \"term,target\" also works. Existing terms are updated."
+msgid ""
+"CSV columns: term, type (synonym/redirect), match_type "
+"(exact/contains/starts), target, status. A simple two-column file "
+"\"term,target\" also works. Existing terms are updated."
 msgstr ""
 
 #: admin/views/view-synonyms.php:126
@@ -1337,7 +1372,9 @@ msgid "Exact rules win over \"starts with\", which wins over \"contains\"."
 msgstr ""
 
 #: admin/views/view-synonyms.php:131
-msgid "Synonyms work in live (AJAX) search and on the results page; the original term is still logged so you can measure the effect."
+msgid ""
+"Synonyms work in live (AJAX) search and on the results page; the original "
+"term is still logged so you can measure the effect."
 msgstr ""
 
 #: admin/views/view-synonyms.php:132
@@ -1366,14 +1403,21 @@ msgstr ""
 msgid "The rule could not be saved."
 msgstr ""
 
-#: includes/class-asl-privacy.php:31
-#: includes/class-asl-privacy.php:45
+#: includes/class-asl-privacy.php:31 includes/class-asl-privacy.php:45
 #: includes/class-asl-privacy.php:67
 msgid "Site search history"
 msgstr ""
 
 #: includes/class-asl-privacy.php:120
-msgid "When you use the search on this site we record the words you searched for, the number of results, which result you clicked and, for logged-in customers, your user account. We do not store your IP address; an anonymous, one-way identifier is used to count unique searchers. A first-party cookie (asl_sid, 1 hour) links a search to the result you open, and a second cookie (asl_cart, 7 days) links it to products you buy. This data is used only to improve our search and catalogue and is deleted automatically after a limited period."
+msgid ""
+"When you use the search on this site we record the words you searched for, "
+"the number of results, which result you clicked and, for logged-in "
+"customers, your user account. We do not store your IP address; an anonymous,"
+" one-way identifier is used to count unique searchers. A first-party cookie "
+"(asl_sid, 1 hour) links a search to the result you open, and a second cookie"
+" (asl_cart, 7 days) links it to products you buy. This data is used only to "
+"improve our search and catalogue and is deleted automatically after a "
+"limited period."
 msgstr ""
 
 #: includes/class-asl-reports.php:53
@@ -1478,4 +1522,294 @@ msgstr ""
 
 #: includes/functions.php:180
 msgid "Custom integration"
+msgstr ""
+
+msgid "Product searched"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Phone"
+msgstr ""
+
+msgid "Note"
+msgstr ""
+
+msgid "\"leave your number\" box for any page or page builder."
+msgstr ""
+
+msgid ""
+"action fired with ( $id, $request ) when a visitor leaves a number; use it "
+"to send an SMS or push to a CRM."
+msgstr ""
+
+msgid "Open"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "Product requests"
+msgstr ""
+
+msgid "Box settings"
+msgstr ""
+
+msgid ""
+"Visitors who searched for a product you do not have and left their phone "
+"number. Call them when the product is available, then mark the request as "
+"done."
+msgstr ""
+
+msgid "The request box is turned off, so visitors cannot leave new requests."
+msgstr ""
+
+msgid "Turn it on"
+msgstr ""
+
+msgid "Waiting for a call"
+msgstr ""
+
+msgid "All requests"
+msgstr ""
+
+msgid "Phone, name or product"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Requests for: %s"
+msgstr ""
+
+msgid "Mark all open as done"
+msgstr ""
+
+msgid "Show all products"
+msgstr ""
+
+msgid ""
+"No requests yet. They appear here as soon as a visitor leaves a number on an"
+" empty search page."
+msgstr ""
+
+msgid "Customer"
+msgstr ""
+
+msgid "Status & note"
+msgstr ""
+
+msgid ""
+"The last failed-searches check found products for this search. Time to call!"
+msgstr ""
+
+msgid "Found on the site now"
+msgstr ""
+
+msgid "Note for the team"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Page where the request was sent"
+msgstr ""
+
+msgid "Delete this request?"
+msgstr ""
+
+msgid "Most requested products"
+msgstr ""
+
+msgid "Open requests only. A strong signal of what to stock next."
+msgstr ""
+
+msgid "Nothing yet."
+msgstr ""
+
+msgid "Customers waiting for a call"
+msgstr ""
+
+msgid "%s request"
+msgid_plural "%s requests"
+msgstr[0] ""
+
+msgid "Request updated."
+msgstr ""
+
+msgid "%s request deleted."
+msgid_plural "%s requests deleted."
+msgstr[0] ""
+
+msgid "%s request updated."
+msgid_plural "%s requests updated."
+msgstr[0] ""
+
+msgid "Product requests (\"leave your number\")"
+msgstr ""
+
+msgid "Show the request box"
+msgstr ""
+
+msgid ""
+"When a search finds nothing (even after the automatic rescue), visitors see "
+"a box to leave their phone number instead of a dead end. For page builders "
+"use the [webisearch_request_form] shortcode."
+msgstr ""
+
+msgid "Replace the \"No products were found\" message"
+msgstr ""
+
+msgid ""
+"Hides the theme's default WooCommerce message on empty search pages, so the "
+"box takes its place."
+msgstr ""
+
+msgid "Also offer it above close matches"
+msgstr ""
+
+msgid ""
+"When the exact product is not found and visitors see related products (found"
+" with fewer words), a one-line, expandable version is shown under \"Showing "
+"results for …\"."
+msgstr ""
+
+msgid "Ask for the name"
+msgstr ""
+
+msgid "Optional field; the phone number is always required."
+msgstr ""
+
+msgid "Box title"
+msgstr ""
+
+msgid "Leave empty for the default."
+msgstr ""
+
+msgid "Default: %s"
+msgstr ""
+
+msgid "{term} is replaced with what the visitor searched."
+msgstr ""
+
+msgid "Box text"
+msgstr ""
+
+msgid "Button text"
+msgstr ""
+
+msgid "Thank-you message"
+msgstr ""
+
+msgid "E-mail each new request"
+msgstr ""
+
+msgid "Send request e-mails to"
+msgstr ""
+
+msgid "Separate several addresses with commas. Empty = the site admin e-mail."
+msgstr ""
+
+msgid "For SMS, developers can use the asl_request_created action."
+msgstr ""
+
+msgid "Turn \"nothing found\" into a sales lead. Requests appear in %s."
+msgstr ""
+
+msgid ""
+"If a product you searched for is not available and you leave your phone "
+"number (and optionally your name), we store it with the product you searched"
+" for so our staff can call you when it becomes available. You can ask us to "
+"delete it at any time."
+msgstr ""
+
+msgid "New"
+msgstr ""
+
+msgid "Contacted"
+msgstr ""
+
+msgid "Done"
+msgstr ""
+
+msgid "Canceled"
+msgstr ""
+
+msgid "\"{term}\" is not available on the site right now"
+msgstr ""
+
+msgid ""
+"Leave your phone number. As soon as it is available, our experts will call "
+"you."
+msgstr ""
+
+msgid "Notify me"
+msgstr ""
+
+msgid ""
+"Thank you! Your number has been registered. Our experts will call you as "
+"soon as the product is available."
+msgstr ""
+
+msgid "Didn't find what you were looking for?"
+msgstr ""
+
+msgid "Your name"
+msgstr ""
+
+msgid "Your name (optional)"
+msgstr ""
+
+msgid "Phone number"
+msgstr ""
+
+msgid ""
+"Not exactly \"%s\"? Leave your number and we will call you when it is "
+"available."
+msgstr ""
+
+msgid ""
+"Didn't find what you were looking for? Leave your number and we will call "
+"you."
+msgstr ""
+
+msgid "Sending…"
+msgstr ""
+
+msgid "Please enter a valid phone number."
+msgstr ""
+
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+msgid "The page has expired. Please reload it and try again."
+msgstr ""
+
+msgid "Too many requests. Please try again later."
+msgstr ""
+
+msgid "New product request: %1$s (%2$s)"
+msgstr ""
+
+msgid ""
+"A visitor searched for a product you do not have and left a phone number:"
+msgstr ""
+
+msgid "Open product requests"
+msgstr ""
+
+msgid "Count revenue when the order is"
+msgstr ""
+
+msgid ""
+"Cash-on-delivery orders are \"Processing\" before any money is received, so "
+"\"Completed\" gives the real figure. Revenue of orders that are later "
+"cancelled, failed or refunded is always taken back."
+msgstr ""
+
+msgid "Completed only (recommended)"
+msgstr ""
+
+msgid "Processing or completed"
 msgstr ""

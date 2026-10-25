@@ -3,7 +3,7 @@
  * Plugin Name:       WebiSearch
  * Plugin URI:        https://webiloper.ir/
  * Description:       Search analytics for any WordPress site: logs standard, AJAX and live searches, measures result clicks and WooCommerce conversions, finds failed searches and fixes them with synonyms and redirects.
- * Version:           3.2.1
+ * Version:           3.3.3
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            webiloper
@@ -20,8 +20,8 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'ASL_VERSION', '3.2.1' );
-define( 'ASL_DB_VERSION', '3.2.0' );
+define( 'ASL_VERSION', '3.3.3' );
+define( 'ASL_DB_VERSION', '3.3.2' );
 define( 'ASL_PLUGIN_FILE', __FILE__ );
 define( 'ASL_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ASL_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -36,6 +36,7 @@ require_once ASL_PLUGIN_DIR . 'includes/class-asl-logger.php';
 require_once ASL_PLUGIN_DIR . 'includes/class-asl-tracker.php';
 require_once ASL_PLUGIN_DIR . 'includes/class-asl-smart.php';
 require_once ASL_PLUGIN_DIR . 'includes/class-asl-review.php';
+require_once ASL_PLUGIN_DIR . 'includes/class-asl-requests.php';
 require_once ASL_PLUGIN_DIR . 'includes/class-asl-clicks.php';
 require_once ASL_PLUGIN_DIR . 'includes/class-asl-reports.php';
 require_once ASL_PLUGIN_DIR . 'includes/class-asl-shortcodes.php';
@@ -56,6 +57,7 @@ function asl_bootstrap() {
 	new ASL_Tracker();
 	ASL_Smart::init();
 	ASL_Review::init();
+	ASL_Requests::init();
 	new ASL_Clicks();
 	new ASL_Shortcodes();
 	new ASL_Privacy();

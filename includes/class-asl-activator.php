@@ -68,6 +68,7 @@ class ASL_Activator {
 		$logs            = asl_table( 'logs' );
 		$rules           = asl_table( 'rules' );
 		$clicks          = asl_table( 'clicks' );
+		$requests        = asl_table( 'requests' );
 		$previous        = get_option( 'asl_db_version' );
 
 		// dbDelta needs two spaces after PRIMARY KEY and one field per line.
@@ -122,6 +123,25 @@ class ASL_Activator {
   KEY timestamp (timestamp)
 ) $charset_collate;";
 
+		$sql_requests = "CREATE TABLE $requests (
+  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  term varchar(191) NOT NULL DEFAULT '',
+  term_norm varchar(191) NOT NULL DEFAULT '',
+  name varchar(100) NOT NULL DEFAULT '',
+  phone varchar(20) NOT NULL DEFAULT '',
+  user_id bigint(20) unsigned NOT NULL DEFAULT 0,
+  log_id bigint(20) unsigned NOT NULL DEFAULT 0,
+  page_url varchar(500) NOT NULL DEFAULT '',
+  status varchar(20) NOT NULL DEFAULT 'new',
+  note text NOT NULL,
+  created datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  updated datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY  (id),
+  KEY status (status),
+  KEY term_norm (term_norm),
+  KEY phone (phone)
+) $charset_collate;";
+
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
 		// v2 had an index on term(255): heavy to maintain and too long for some MySQL setups.
@@ -137,12 +157,18 @@ class ASL_Activator {
 		dbDelta( $sql_logs );
 		dbDelta( $sql_rules );
 		dbDelta( $sql_clicks );
+		dbDelta( $sql_requests );
 
 		// Fill term_norm for rows logged by older versions (a short first pass, cron finishes the rest).
 		self::backfill_normalized_terms( ( defined( 'WP_CLI' ) && WP_CLI ) ? 600 : 3 );
 
 		// 3.0.0 stored Jalali years (e.g. 1405-07-21) on sites running a Persian date plugin. Repair them.
 		self::repair_jalali_dates();
+
+		// 3.3.2: revenue of cancelled/failed/unpaid (COD) orders was never taken back. Re-check all orders once.
+		if ( $previous && version_compare( $previous, '3.3.2', '<' ) ) {
+			update_option( 'asl_revenue_resync', 1, false );
+		}
 
 		// When click tracking started (CTR is only computed from this point).
 		if ( ! get_option( 'asl_tracking_since' ) ) {

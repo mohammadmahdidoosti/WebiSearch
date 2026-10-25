@@ -41,6 +41,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<h3><?php esc_html_e( 'For developers', 'advanced-search-logger' ); ?></h3>
 		<ul class="asl-help">
 			<li><code>[webisearch_popular limit="8" days="30" style="tags|list" title="..."]</code> — <?php esc_html_e( 'popular searches with results, for your search page or header.', 'advanced-search-logger' ); ?></li>
+			<li><code>[webisearch_request_form term="..." compact="yes|no"]</code> — <?php esc_html_e( '"leave your number" box for any page or page builder.', 'advanced-search-logger' ); ?></li>
+			<li><code>asl_request_created</code> — <?php esc_html_e( 'action fired with ( $id, $request ) when a visitor leaves a number; use it to send an SMS or push to a CRM.', 'advanced-search-logger' ); ?></li>
 			<li><code>webisearch_log_search( $term, $result_count, array( 'source' => 'api' ) )</code> — <?php esc_html_e( 'log searches from a custom engine that does not use WP_Query.', 'advanced-search-logger' ); ?></li>
 			<li><code>asl_should_log</code>, <code>asl_track_query</code>, <code>asl_result_count</code>, <code>asl_live_search_selectors</code>, <code>asl_capability</code> — <?php esc_html_e( 'filters', 'advanced-search-logger' ); ?>; <code>asl_search_logged</code>, <code>asl_result_clicked</code> — <?php esc_html_e( 'actions', 'advanced-search-logger' ); ?>.</li>
 			<li><code>wp webisearch stats|export|cleanup|report</code> — <?php esc_html_e( 'WP-CLI commands.', 'advanced-search-logger' ); ?></li>
