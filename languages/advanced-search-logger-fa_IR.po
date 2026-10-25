@@ -1,0 +1,1479 @@
+# Copyright (C) 2026 webiloper
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WebiSearch 3.2.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/WebiSearch\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: fa_IR\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-10-14T06:17:16+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: advanced-search-logger\n"
+
+#. Plugin Name of the plugin
+#: advanced-search-logger.php
+msgid "WebiSearch"
+msgstr "WebiSearch"
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: advanced-search-logger.php
+msgid "https://webiloper.ir/"
+msgstr "https://webiloper.ir/"
+
+#. Description of the plugin
+#: advanced-search-logger.php
+msgid "Search analytics for any WordPress site: logs standard, AJAX and live searches, measures result clicks and WooCommerce conversions, finds failed searches and fixes them with synonyms and redirects."
+msgstr "تحلیل جستجوی سایت برای هر سایت وردپرسی: ثبت جستجوهای معمولی، ایجکس و زنده، سنجش کلیک روی نتایج و فروش ووکامرس، پیدا کردن جستجوهای بی‌نتیجه و رفع آن‌ها با مترادف و تغییر مسیر."
+
+#. Author of the plugin
+#: advanced-search-logger.php
+msgid "webiloper"
+msgstr "وبیلوپر"
+
+#: admin/class-asl-admin.php:57
+msgid "Search Logger"
+msgstr "ثبت کننده جستجو"
+
+#: admin/class-asl-admin.php:58
+#: admin/views/view-dashboard.php:121
+msgid "Search Analytics Dashboard"
+msgstr "داشبورد تجزیه و تحلیل جستجو"
+
+#: admin/class-asl-admin.php:58
+#: admin/class-asl-admin.php:108
+msgid "Dashboard"
+msgstr "داشبورد"
+
+#: admin/class-asl-admin.php:59
+#: admin/views/view-review.php:27
+msgid "Failed searches review"
+msgstr "بررسی جستجوهای بی‌نتیجه"
+
+#: admin/class-asl-admin.php:59
+msgid "Failed searches"
+msgstr "جستجوهای بی‌نتیجه"
+
+#: admin/class-asl-admin.php:60
+#: admin/views/view-logs-page.php:25
+msgid "All Search Logs"
+msgstr "همه گزارش‌های جستجو"
+
+#: admin/class-asl-admin.php:60
+msgid "All Logs"
+msgstr "همه گزارش‌ها"
+
+#: admin/class-asl-admin.php:61
+#: admin/views/view-synonyms.php:26
+msgid "Synonyms & Redirects"
+msgstr "مترادف‌ها و تغییر مسیرها"
+
+#: admin/class-asl-admin.php:62
+#: admin/views/view-settings.php:13
+msgid "Search Logger Settings"
+msgstr "تنظیمات ثبت جستجو"
+
+#: admin/class-asl-admin.php:62
+#: admin/class-asl-admin.php:109
+msgid "Settings"
+msgstr "تنظیمات"
+
+#. translators: %s: number
+#: admin/class-asl-admin.php:158
+#, php-format
+msgid "%s log deleted."
+msgid_plural "%s logs deleted."
+msgstr[0] "%s گزارش حذف شد."
+
+#: admin/class-asl-admin.php:159
+msgid "All search logs have been deleted."
+msgstr "همه گزارش‌های جستجو حذف شدند."
+
+#: admin/class-asl-admin.php:160
+msgid "Rule saved. It applies to new searches immediately."
+msgstr "قانون ذخیره شد و از همین حالا روی جستجوهای جدید اعمال می‌شود."
+
+#. translators: %s: number
+#: admin/class-asl-admin.php:162
+#, php-format
+msgid "%s rule deleted."
+msgid_plural "%s rules deleted."
+msgstr[0] "%s قانون حذف شد."
+
+#: admin/class-asl-admin.php:163
+msgid "Rules updated."
+msgstr "قوانین به‌روزرسانی شدند."
+
+#: admin/class-asl-admin.php:165
+msgid "Marked as resolved. It will reappear only if it fails again."
+msgstr "به‌عنوان «رفع‌شده» علامت خورد. فقط اگر دوباره بی‌نتیجه بماند، برمی‌گردد."
+
+#: admin/class-asl-admin.php:166
+msgid "The term is back in the list."
+msgstr "عبارت به فهرست برگشت."
+
+#: admin/class-asl-admin.php:167
+msgid "Test report sent. Check the inbox (and spam folder)."
+msgstr "گزارش آزمایشی ارسال شد. صندوق ورودی (و پوشه اسپم) را بررسی کنید."
+
+#: admin/class-asl-admin.php:168
+msgid "WordPress could not send the e-mail. Check your SMTP/mail settings."
+msgstr "وردپرس نتوانست ایمیل را ارسال کند. تنظیمات SMTP/ایمیل را بررسی کنید."
+
+#: admin/class-asl-admin.php:189
+msgid "Sorry, you are not allowed to do that."
+msgstr "متأسفیم، شما اجازه انجام این کار را ندارید."
+
+#: admin/class-asl-admin.php:220
+msgid "Please enter a valid URL (https://...) or a path starting with /."
+msgstr "یک نشانی معتبر (https://...) یا مسیری که با / شروع می‌شود وارد کنید."
+
+#: admin/class-asl-admin.php:226
+#: includes/class-asl-db.php:677
+msgid "Both the search term and the target are required."
+msgstr "وارد کردن عبارت جستجو و هدف هر دو الزامی است."
+
+#: admin/class-asl-admin.php:273
+msgid "Please choose a CSV file."
+msgstr "لطفاً یک فایل CSV انتخاب کنید."
+
+#. translators: 1: added, 2: updated, 3: skipped
+#: admin/class-asl-admin.php:277
+#, php-format
+msgid "Import finished: %1$d added, %2$d updated, %3$d skipped."
+msgstr "درون‌ریزی تمام شد: %1$d مورد اضافه، %2$d مورد به‌روزرسانی و %3$d مورد رد شد."
+
+#. translators: 1: checked so far, 2: total
+#: admin/class-asl-admin.php:337
+#, php-format
+msgid "Checking… %1$s of %2$s"
+msgstr "در حال بررسی… %1$s از %2$s"
+
+#: admin/class-asl-admin.php:338
+msgid "Done. Reloading…"
+msgstr "تمام شد. در حال بارگذاری دوباره…"
+
+#: admin/class-asl-admin.php:472
+#: admin/class-asl-admin.php:737
+#: admin/class-asl-export.php:186
+#: admin/class-asl-export.php:225
+#: admin/class-asl-synonyms-list-table.php:106
+#: admin/class-asl-terms-list-table.php:46
+#: admin/views/view-dashboard.php:138
+#: admin/views/view-dashboard.php:286
+#: includes/class-asl-reports.php:65
+msgid "Searches"
+msgstr "جستجوها"
+
+#: admin/class-asl-admin.php:473
+#: admin/class-asl-admin.php:738
+#: admin/class-asl-terms-list-table.php:48
+msgid "No results"
+msgstr "بدون نتیجه"
+
+#: admin/class-asl-admin.php:474
+msgid "Hour of day"
+msgstr "ساعت روز"
+
+#: admin/class-asl-admin.php:475
+#: admin/views/view-dashboard.php:281
+msgid "No data for this period yet."
+msgstr "هنوز داده‌ای برای این بازه وجود ندارد."
+
+#: admin/class-asl-admin.php:532
+msgid "What gets logged"
+msgstr "چه چیزی ثبت شود"
+
+#: admin/class-asl-admin.php:533
+msgid "Enable logging"
+msgstr "فعال کردن ثبت گزارش"
+
+#: admin/class-asl-admin.php:534
+msgid "Minimum search length (characters)"
+msgstr "حداقل طول جستجو (حرف)"
+
+#: admin/class-asl-admin.php:534
+msgid "Shorter searches are not logged."
+msgstr "جستجوهای کوتاه‌تر از این ثبت نمی‌شوند."
+
+#: admin/class-asl-admin.php:535
+msgid "Merge repeated & as-you-type searches (seconds)"
+msgstr "ادغام جستجوهای تکراری و حین تایپ (ثانیه)"
+
+#: admin/class-asl-admin.php:535
+msgid "Live search fires a request for almost every key press. Within this window, the same visitor's keystrokes (\"پم\", \"پمپ\", \"پمپ آب\") are stored as one search with the final term, and reloading the same search is counted once. 0 = off."
+msgstr "جستجوی زنده تقریباً با هر کلید یک درخواست می‌فرستد. در این بازه زمانی، تایپ‌های پشت‌سرهم یک بازدیدکننده («پم»، «پمپ»، «پمپ آب») به‌عنوان یک جستجو با عبارت نهایی ثبت می‌شوند و رفرش همان جستجو هم یک بار شمرده می‌شود. ۰ = خاموش."
+
+#: admin/class-asl-admin.php:536
+msgid "Do not log these user roles"
+msgstr "این نقش‌های کاربری ثبت نشوند"
+
+#: admin/class-asl-admin.php:536
+msgid "Searches by your own staff while testing distort the statistics."
+msgstr "جستجوهای آزمایشی همکاران خودتان آمار را خراب می‌کند."
+
+#: admin/class-asl-admin.php:537
+msgid "Ignore bots and crawlers"
+msgstr "نادیده گرفتن ربات‌ها و خزنده‌ها"
+
+#: admin/class-asl-admin.php:538
+msgid "Ignore spam searches"
+msgstr "نادیده گرفتن جستجوهای اسپم"
+
+#: admin/class-asl-admin.php:538
+msgid "Searches containing links, e-mail addresses, code or very long random strings."
+msgstr "جستجوهایی که لینک، ایمیل، کد یا رشته‌های تصادفی خیلی بلند دارند."
+
+#: admin/class-asl-admin.php:539
+msgid "Ignore these terms"
+msgstr "نادیده گرفتن این عبارت‌ها"
+
+#: admin/class-asl-admin.php:539
+msgid "One per line. Use * as a wildcard, e.g. test*"
+msgstr "هر مورد در یک خط. از * به‌عنوان جای‌گیر استفاده کنید، مثل test*"
+
+#: admin/class-asl-admin.php:540
+msgid "Ignore these IP addresses"
+msgstr "نادیده گرفتن این آی‌پی‌ها"
+
+#: admin/class-asl-admin.php:540
+msgid "One per line. Supports 1.2.3.* and CIDR ranges like 10.0.0.0/8."
+msgstr "هر مورد در یک خط. الگوی 1.2.3.* و بازه‌های CIDR مثل 10.0.0.0/8 پشتیبانی می‌شود."
+
+#. translators: %s: IP
+#: admin/class-asl-admin.php:540
+#, php-format
+msgid "Your current IP: %s"
+msgstr "آی‌پی فعلی شما: %s"
+
+#. translators: %s: IP
+#: admin/class-asl-admin.php:541
+msgid "Log REST API searches"
+msgstr "ثبت جستجوهای REST API"
+
+#. translators: %s: IP
+#: admin/class-asl-admin.php:541
+msgid "For headless sites and apps using /wp-json/. Off by default because editors also search through the REST API."
+msgstr "برای سایت‌های هدلس و اپلیکیشن‌هایی که از /wp-json/ استفاده می‌کنند. به‌طور پیش‌فرض خاموش است چون ویرایشگر وردپرس هم از REST API جستجو می‌کند."
+
+#: admin/class-asl-admin.php:543
+msgid "Better search results"
+msgstr "نتایج جستجوی بهتر"
+
+#: admin/class-asl-admin.php:544
+msgid "Fix Arabic characters in searches"
+msgstr "اصلاح حروف عربی در جستجو"
+
+#: admin/class-asl-admin.php:544
+msgid "Converts Arabic ي and ك to Persian ی and ک and removes tatweel, diacritics and invisible characters before searching. Visitors with Arabic keyboards will find your products instead of getting \"nothing found\"."
+msgstr "پیش از جستجو، «ي» و «ك» عربی را به «ی» و «ک» فارسی تبدیل می‌کند و کشیده، اعراب و نویسه‌های نامرئی را حذف می‌کند. بازدیدکنندگانی که کیبورد عربی دارند به‌جای «چیزی پیدا نشد» محصولات شما را می‌بینند."
+
+#: admin/class-asl-admin.php:545
+msgid "Match any spelling of Persian letters and digits"
+msgstr "یکسان دیدن املای حروف و اعداد فارسی"
+
+#: admin/class-asl-admin.php:545
+msgid "A search for \"سایز 63\" also finds titles written as \"سايز ۶۳\" (Arabic ي/ك, Persian or Latin digits, half-space or space). Recommended: product titles are often typed with different keyboards."
+msgstr "جستجوی «سایز 63» عنوان‌هایی مثل «سايز ۶۳» را هم پیدا می‌کند (ي/ك عربی، عدد فارسی یا انگلیسی، نیم‌فاصله یا فاصله). توصیه می‌شود: عنوان محصولات معمولاً با کیبوردهای مختلف تایپ شده‌اند."
+
+#: admin/class-asl-admin.php:546
+msgid "Search in"
+msgstr "جستجو در"
+
+#: admin/class-asl-admin.php:546
+msgid "WordPress also searches the full description, so a product whose description merely mentions a word (\"…can be used with a tank\") appears for that word. Title only gives cleaner results for shops with descriptive titles."
+msgstr "وردپرس در توضیحات کامل محصول هم جستجو می‌کند؛ پس محصولی که فقط در توضیحاتش کلمه‌ای آمده («…قابل استفاده با تانکر») برای آن کلمه هم نمایش داده می‌شود. برای فروشگاه‌هایی که عنوان محصولاتشان کامل است، «فقط عنوان» نتایج تمیزتری می‌دهد."
+
+#: admin/class-asl-admin.php:547
+msgid "Rescue searches that find nothing"
+msgstr "نجات جستجوهای بی‌نتیجه"
+
+#: admin/class-asl-admin.php:547
+msgid "Only when a search returns zero results: separates numbers glued to words (مغزی1/2), removes text pasted from product pages, corrects words that do not exist in your product titles (missing آ, typos, words written together) and, if needed, searches with fewer words. Searches that already work are never changed."
+msgstr "فقط وقتی جستجو هیچ نتیجه‌ای ندارد: عدد چسبیده به کلمه را جدا می‌کند (مغزی1/2)، متن کپی‌شده از صفحه محصول را حذف می‌کند، کلمه‌هایی را که در عنوان محصولات شما وجود ندارند اصلاح می‌کند (آ جاافتاده، غلط تایپی، کلمه‌های چسبیده) و در صورت نیاز با کلمه‌های کمتر جستجو می‌کند. جستجوهایی که نتیجه دارند هرگز تغییر نمی‌کنند."
+
+#: admin/class-asl-admin.php:548
+msgid "Tell the visitor what was searched instead"
+msgstr "به بازدیدکننده بگو به‌جایش چه جستجو شد"
+
+#: admin/class-asl-admin.php:548
+msgid "Shows \"Showing results for …\" above the results, like Google."
+msgstr "مثل گوگل، بالای نتایج «نمایش نتایج برای …» را نشان می‌دهد."
+
+#: admin/class-asl-admin.php:549
+msgid "Help on empty result pages"
+msgstr "راهنما در صفحه بدون نتیجه"
+
+#: admin/class-asl-admin.php:549
+msgid "When nothing is found even after the rescue, WooCommerce result pages show popular searches and the text below. For other themes use the [webisearch_no_results] shortcode."
+msgstr "اگر حتی بعد از اصلاح خودکار چیزی پیدا نشد، صفحه نتایج ووکامرس جستجوهای پرطرفدار و متن زیر را نشان می‌دهد. برای قالب‌های دیگر از کد کوتاه [webisearch_no_results] استفاده کنید."
+
+#: admin/class-asl-admin.php:550
+msgid "Text for empty result pages"
+msgstr "متن صفحه بدون نتیجه"
+
+#: admin/class-asl-admin.php:550
+msgid "Optional. Example: Didn't find it? Call us on 021-… or message us on WhatsApp — we probably have it."
+msgstr "اختیاری. مثال: پیدا نکردید؟ با ۰۲۱-… تماس بگیرید یا در واتس‌اپ پیام بدهید؛ احتمالاً موجودش را داریم."
+
+#: admin/class-asl-admin.php:551
+msgid "Do not cache search result pages"
+msgstr "کش نکردن صفحه نتایج جستجو"
+
+#: admin/class-asl-admin.php:551
+msgid "Page caches (LiteSpeed, WP Rocket, W3 Total Cache...) serve cached search pages without running WordPress, so those searches would be missing from the logs."
+msgstr "افزونه‌های کش صفحه (LiteSpeed، WP Rocket، W3 Total Cache و...) صفحه جستجوی کش‌شده را بدون اجرای وردپرس نمایش می‌دهند و آن جستجوها در گزارش ثبت نمی‌شوند."
+
+#: admin/class-asl-admin.php:553
+msgid "Clicks & conversions"
+msgstr "کلیک‌ها و فروش"
+
+#: admin/class-asl-admin.php:554
+msgid "Track clicks on search results"
+msgstr "ردیابی کلیک روی نتایج جستجو"
+
+#: admin/class-asl-admin.php:554
+msgid "Measures click-through rate and click position for the results page and for live search dropdowns."
+msgstr "نرخ کلیک و رتبه نتیجه کلیک‌شده را برای صفحه نتایج و منوی کشویی جستجوی زنده اندازه می‌گیرد."
+
+#: admin/class-asl-admin.php:555
+msgid "Track add-to-cart and revenue (WooCommerce)"
+msgstr "ردیابی افزودن به سبد و درآمد (ووکامرس)"
+
+#: admin/class-asl-admin.php:556
+msgid "Extra live-search CSS selectors"
+msgstr "سلکتورهای CSS اضافی جستجوی زنده"
+
+#: admin/class-asl-admin.php:556
+msgid "Only needed if clicks in your theme's live search dropdown are not counted. One CSS selector per line, e.g. .my-search-dropdown"
+msgstr "فقط وقتی لازم است که کلیک‌های منوی جستجوی زنده قالب شما شمرده نمی‌شوند. هر سلکتور CSS در یک خط، مثل .my-search-dropdown"
+
+#: admin/class-asl-admin.php:558
+msgid "Privacy & storage"
+msgstr "حریم خصوصی و نگهداری داده"
+
+#: admin/class-asl-admin.php:559
+msgid "Link searches to logged-in users"
+msgstr "ثبت نام کاربر برای کاربران واردشده"
+
+#: admin/class-asl-admin.php:559
+msgid "When off, every search is stored anonymously. IP addresses are never stored."
+msgstr "اگر خاموش باشد، همه جستجوها ناشناس ذخیره می‌شوند. آی‌پی هیچ‌وقت ذخیره نمی‌شود."
+
+#: admin/class-asl-admin.php:560
+msgid "Auto-delete logs older than (days)"
+msgstr "حذف خودکار گزارش‌های قدیمی‌تر از (روز)"
+
+#: admin/class-asl-admin.php:560
+msgid "Days to keep logs (0 = keep forever)."
+msgstr "تعداد روز برای نگهداری لاگ‌ها (0 = نگهداری برای همیشه)."
+
+#: admin/class-asl-admin.php:561
+msgid "Show dates in the Jalali calendar"
+msgstr "نمایش تاریخ‌ها به شمسی"
+
+#: admin/class-asl-admin.php:563
+msgid "Weekly e-mail report"
+msgstr "گزارش ایمیلی هفتگی"
+
+#: admin/class-asl-admin.php:564
+msgid "Send a weekly report"
+msgstr "ارسال گزارش هفتگی"
+
+#: admin/class-asl-admin.php:565
+msgid "Recipients"
+msgstr "گیرندگان"
+
+#: admin/class-asl-admin.php:565
+msgid "Separate several addresses with commas."
+msgstr "چند نشانی را با کاما از هم جدا کنید."
+
+#: admin/class-asl-admin.php:566
+msgid "Email subject"
+msgstr "موضوع ایمیل"
+
+#: admin/class-asl-admin.php:567
+msgid "Email body template"
+msgstr "الگوی بدنه ایمیل"
+
+#: admin/class-asl-admin.php:567
+msgid "Leave empty to use the default template."
+msgstr "برای استفاده از الگوی پیش‌فرض خالی بگذارید."
+
+#: admin/class-asl-admin.php:567
+msgid "Placeholders:"
+msgstr "متغیرها:"
+
+#: admin/class-asl-admin.php:574
+msgid "A small script (about 1.5 KB, no jQuery) records which result a visitor opens after searching. WooCommerce add-to-cart and paid orders are credited to the search that led to them."
+msgstr "یک اسکریپت کوچک (حدود ۱٫۵ کیلوبایت، بدون jQuery) ثبت می‌کند بازدیدکننده بعد از جستجو کدام نتیجه را باز کرده است. افزودن به سبد و سفارش‌های پرداخت‌شده ووکامرس به جستجویی که منجر به آن‌ها شده نسبت داده می‌شوند."
+
+#: admin/class-asl-admin.php:614
+msgid "Enabled"
+msgstr "فعال"
+
+#: admin/class-asl-admin.php:621
+msgid "Title, short and full description (WordPress default)"
+msgstr "عنوان، توضیح کوتاه و توضیحات کامل (پیش‌فرض وردپرس)"
+
+#: admin/class-asl-admin.php:622
+msgid "Title and short description"
+msgstr "عنوان و توضیح کوتاه"
+
+#: admin/class-asl-admin.php:623
+msgid "Title only"
+msgstr "فقط عنوان"
+
+#: admin/class-asl-admin.php:726
+msgid "Site search (last 7 days)"
+msgstr "جستجوی سایت (۷ روز گذشته)"
+
+#: admin/class-asl-admin.php:739
+#: admin/class-asl-terms-list-table.php:50
+#: admin/views/view-dashboard.php:289
+msgid "CTR"
+msgstr "نرخ کلیک"
+
+#: admin/class-asl-admin.php:740
+msgid "Top 5 Searches"
+msgstr "۵ جستجوی برتر"
+
+#: admin/class-asl-admin.php:742
+msgid "Top 5 No-Result Searches"
+msgstr "۵ جستجوی برتر بدون نتیجه"
+
+#: admin/class-asl-admin.php:745
+msgid "View Full Dashboard"
+msgstr "مشاهده داشبورد کامل"
+
+#: admin/class-asl-admin.php:756
+msgid "No data yet."
+msgstr "هنوز داده‌ای نیست."
+
+#: admin/class-asl-export.php:23
+msgid "You do not have permission to export."
+msgstr "شما اجازه خروجی گرفتن ندارید."
+
+#: admin/class-asl-export.php:111
+#: admin/class-asl-export.php:185
+#: admin/class-asl-export.php:225
+#: includes/class-asl-privacy.php:71
+msgid "Search term"
+msgstr "عبارت جستجو"
+
+#: admin/class-asl-export.php:112
+msgid "Normalized term"
+msgstr "عبارت یکسان‌سازی‌شده"
+
+#: admin/class-asl-export.php:113
+msgid "Searched as (synonym/redirect)"
+msgstr "جستجوشده به‌صورت (مترادف/تغییر مسیر)"
+
+#: admin/class-asl-export.php:114
+#: admin/class-asl-logs-list-table.php:259
+#: admin/views/view-dashboard.php:154
+msgid "Rescued automatically"
+msgstr "اصلاح خودکار"
+
+#: admin/class-asl-export.php:115
+#: admin/class-asl-export.php:225
+#: admin/class-asl-logs-list-table.php:47
+msgid "Results"
+msgstr "نتایج"
+
+#: admin/class-asl-export.php:116
+#: admin/class-asl-logs-list-table.php:49
+msgid "Source"
+msgstr "منبع"
+
+#: admin/class-asl-export.php:117
+msgid "Post type"
+msgstr "نوع محتوا"
+
+#: admin/class-asl-export.php:118
+#: admin/class-asl-logs-list-table.php:50
+msgid "User"
+msgstr "کاربر"
+
+#: admin/class-asl-export.php:119
+#: admin/class-asl-logs-list-table.php:51
+#: includes/class-asl-privacy.php:75
+msgid "Date"
+msgstr "تاریخ"
+
+#: admin/class-asl-export.php:122
+msgid "Date (Jalali)"
+msgstr "تاریخ (شمسی)"
+
+#: admin/class-asl-export.php:124
+#: admin/class-asl-logs-list-table.php:48
+#: admin/views/view-dashboard.php:322
+msgid "Clicks"
+msgstr "کلیک‌ها"
+
+#: admin/class-asl-export.php:125
+msgid "First click position"
+msgstr "رتبه اولین کلیک"
+
+#: admin/class-asl-export.php:127
+#: admin/class-asl-export.php:194
+msgid "Add to cart"
+msgstr "افزودن به سبد"
+
+#: admin/class-asl-export.php:128
+msgid "Order ID"
+msgstr "شماره سفارش"
+
+#: admin/class-asl-export.php:129
+#: admin/class-asl-export.php:195
+#: admin/class-asl-terms-list-table.php:51
+#: admin/views/view-dashboard.php:292
+msgid "Revenue"
+msgstr "درآمد"
+
+#: admin/class-asl-export.php:152
+#: admin/class-asl-logs-list-table.php:127
+msgid "Guest"
+msgstr "مهمان"
+
+#: admin/class-asl-export.php:187
+#: admin/class-asl-terms-list-table.php:47
+#: admin/views/view-dashboard.php:143
+#: includes/class-asl-reports.php:66
+msgid "Unique searchers"
+msgstr "جستجوکنندگان یکتا"
+
+#: admin/class-asl-export.php:188
+#: admin/views/view-dashboard.php:209
+msgid "Searches with no results"
+msgstr "جستجوهای بدون نتیجه"
+
+#: admin/class-asl-export.php:189
+#: admin/class-asl-terms-list-table.php:49
+msgid "Average results"
+msgstr "میانگین نتایج"
+
+#: admin/class-asl-export.php:190
+msgid "Searches with a click"
+msgstr "جستجوهای دارای کلیک"
+
+#: admin/class-asl-export.php:191
+msgid "CTR %"
+msgstr "نرخ کلیک ٪"
+
+#: admin/class-asl-export.php:197
+#: admin/class-asl-export.php:225
+#: admin/class-asl-terms-list-table.php:52
+#: admin/views/view-review.php:86
+msgid "Last searched"
+msgstr "آخرین جستجو"
+
+#: admin/class-asl-export.php:219
+#: admin/views/view-review.php:17
+msgid "Not in your catalog"
+msgstr "در محصولات شما نیست"
+
+#: admin/class-asl-export.php:220
+#: admin/views/view-review.php:18
+msgid "Close matches"
+msgstr "نتیجه نزدیک"
+
+#: admin/class-asl-export.php:221
+#: admin/views/view-review.php:19
+msgid "Fixed automatically"
+msgstr "اصلاح خودکار"
+
+#: admin/class-asl-export.php:222
+#: admin/views/view-review.php:20
+msgid "Found now"
+msgstr "الان پیدا می‌شود"
+
+#: admin/class-asl-export.php:223
+#: admin/views/view-review.php:21
+msgid "Ignored"
+msgstr "نادیده گرفته‌شده"
+
+#: admin/class-asl-export.php:225
+msgid "Status"
+msgstr "وضعیت"
+
+#: admin/class-asl-export.php:225
+#: admin/views/view-review.php:84
+msgid "What they see now"
+msgstr "الان چه می‌بینند"
+
+#: admin/class-asl-logs-list-table.php:46
+#: admin/class-asl-synonyms-list-table.php:38
+#: admin/class-asl-terms-list-table.php:45
+#: admin/views/view-dashboard.php:217
+#: admin/views/view-dashboard.php:258
+#: admin/views/view-dashboard.php:285
+msgid "Search Term"
+msgstr "عبارت جستجو"
+
+#: admin/class-asl-logs-list-table.php:105
+msgid "redirected to"
+msgstr "تغییر مسیر به"
+
+#: admin/class-asl-logs-list-table.php:105
+msgid "auto-fixed to"
+msgstr "اصلاح خودکار به"
+
+#: admin/class-asl-logs-list-table.php:105
+msgid "searched as"
+msgstr "جستجو شد به‌صورت"
+
+#: admin/class-asl-logs-list-table.php:109
+msgid "View all for this term"
+msgstr "مشاهده همه برای این عبارت"
+
+#: admin/class-asl-logs-list-table.php:110
+#: admin/class-asl-terms-list-table.php:105
+#: admin/views/view-dashboard.php:232
+#: admin/views/view-logs-page.php:38
+#: admin/views/view-review.php:112
+msgid "Add rule"
+msgstr "افزودن قانون"
+
+#: admin/class-asl-logs-list-table.php:111
+#: admin/class-asl-terms-list-table.php:106
+#: admin/views/view-dashboard.php:235
+#: admin/views/view-logs-page.php:39
+#: admin/views/view-review.php:122
+msgid "Try on site"
+msgstr "امتحان در سایت"
+
+#: admin/class-asl-logs-list-table.php:125
+msgid "Deleted User"
+msgstr "کاربر حذف‌شده"
+
+#. translators: %s: position number
+#: admin/class-asl-logs-list-table.php:157
+#, php-format
+msgid "(#%s)"
+msgstr "(رتبه %s)"
+
+#: admin/class-asl-logs-list-table.php:160
+msgid "Added to cart"
+msgstr "به سبد اضافه شد"
+
+#: admin/class-asl-logs-list-table.php:199
+#: admin/class-asl-synonyms-list-table.php:119
+#: admin/class-asl-synonyms-list-table.php:189
+msgid "Delete"
+msgstr "حذف"
+
+#: admin/class-asl-logs-list-table.php:227
+#: admin/class-asl-terms-list-table.php:197
+msgid "No searches match these filters."
+msgstr "هیچ جستجویی با این فیلترها پیدا نشد."
+
+#: admin/class-asl-logs-list-table.php:250
+msgid "From"
+msgstr "از"
+
+#: admin/class-asl-logs-list-table.php:251
+msgid "To"
+msgstr "تا"
+
+#: admin/class-asl-logs-list-table.php:255
+msgid "All results"
+msgstr "همه نتایج"
+
+#: admin/class-asl-logs-list-table.php:256
+msgid "No results only"
+msgstr "فقط بدون نتیجه"
+
+#: admin/class-asl-logs-list-table.php:257
+msgid "With results"
+msgstr "دارای نتیجه"
+
+#: admin/class-asl-logs-list-table.php:258
+msgid "With a click"
+msgstr "دارای کلیک"
+
+#: admin/class-asl-logs-list-table.php:262
+msgid "All sources"
+msgstr "همه منابع"
+
+#: admin/class-asl-logs-list-table.php:270
+msgid "All visitors"
+msgstr "همه بازدیدکنندگان"
+
+#: admin/class-asl-logs-list-table.php:271
+msgid "Guests"
+msgstr "مهمان‌ها"
+
+#: admin/class-asl-logs-list-table.php:272
+msgid "Logged-in users"
+msgstr "کاربران واردشده"
+
+#: admin/class-asl-logs-list-table.php:285
+#: admin/class-asl-synonyms-list-table.php:246
+msgid "Filter"
+msgstr "صافی"
+
+#: admin/class-asl-logs-list-table.php:290
+msgid "Reset filters"
+msgstr "حذف فیلترها"
+
+#: admin/class-asl-synonyms-list-table.php:39
+msgid "Type"
+msgstr "نوع"
+
+#: admin/class-asl-synonyms-list-table.php:40
+msgid "Target (Synonym or URL)"
+msgstr "هدف (مترادف یا URL)"
+
+#: admin/class-asl-synonyms-list-table.php:41
+msgid "Used"
+msgstr "دفعات استفاده"
+
+#: admin/class-asl-synonyms-list-table.php:42
+msgid "Last used"
+msgstr "آخرین استفاده"
+
+#: admin/class-asl-synonyms-list-table.php:90
+msgid "Disabled"
+msgstr "غیرفعال"
+
+#: admin/class-asl-synonyms-list-table.php:92
+msgid "Edit"
+msgstr "ویرایش"
+
+#: admin/class-asl-synonyms-list-table.php:104
+#: admin/class-asl-synonyms-list-table.php:188
+msgid "Disable"
+msgstr "غیرفعال کردن"
+
+#: admin/class-asl-synonyms-list-table.php:104
+#: admin/class-asl-synonyms-list-table.php:187
+msgid "Enable"
+msgstr "فعال کردن"
+
+#: admin/class-asl-synonyms-list-table.php:118
+msgid "Delete this rule?"
+msgstr "این قانون حذف شود؟"
+
+#: admin/class-asl-synonyms-list-table.php:133
+#: admin/class-asl-synonyms-list-table.php:240
+msgid "Synonym"
+msgstr "مترادف"
+
+#: admin/class-asl-synonyms-list-table.php:134
+#: admin/class-asl-synonyms-list-table.php:241
+msgid "Redirect"
+msgstr "تغییر مسیر"
+
+#: admin/class-asl-synonyms-list-table.php:137
+msgid "Exact match"
+msgstr "تطابق دقیق"
+
+#: admin/class-asl-synonyms-list-table.php:138
+msgid "Contains the word"
+msgstr "شامل کلمه"
+
+#: admin/class-asl-synonyms-list-table.php:139
+msgid "Starts with"
+msgstr "شروع با"
+
+#: admin/class-asl-synonyms-list-table.php:224
+msgid "No rules yet. Start with the searches that returned nothing on the dashboard."
+msgstr "هنوز قانونی ندارید. از جستجوهای بدون نتیجه در داشبورد شروع کنید."
+
+#: admin/class-asl-synonyms-list-table.php:239
+msgid "All types"
+msgstr "همه انواع"
+
+#: admin/class-asl-terms-list-table.php:104
+msgid "Show searches"
+msgstr "نمایش جستجوها"
+
+#: admin/class-asl-terms-list-table.php:107
+msgid "Delete every log of this term?"
+msgstr "همه گزارش‌های این عبارت حذف شوند؟"
+
+#: admin/class-asl-terms-list-table.php:107
+msgid "Delete logs"
+msgstr "حذف گزارش‌ها"
+
+#. translators: %s: number of add-to-cart events
+#: admin/class-asl-terms-list-table.php:157
+#, php-format
+msgid "%s carts"
+msgstr "%s سبد خرید"
+
+#: admin/views/view-dashboard.php:19
+msgid "7 days"
+msgstr "۷ روز"
+
+#: admin/views/view-dashboard.php:20
+msgid "30 days"
+msgstr "۳۰ روز"
+
+#: admin/views/view-dashboard.php:21
+msgid "90 days"
+msgstr "۹۰ روز"
+
+#: admin/views/view-dashboard.php:22
+msgid "12 months"
+msgstr "۱۲ ماه"
+
+#: admin/views/view-dashboard.php:40
+msgid "pts"
+msgstr "واحد"
+
+#: admin/views/view-dashboard.php:43
+#: admin/views/view-dashboard.php:265
+msgid "new"
+msgstr "جدید"
+
+#: admin/views/view-dashboard.php:52
+msgid "Compared with the previous period"
+msgstr "در مقایسه با بازه قبل"
+
+#. translators: 1: percent, 2: search term
+#: admin/views/view-dashboard.php:62
+#, php-format
+msgid "%1$s%% of searches find nothing. The most common one is \"%2$s\" — add a synonym or the missing product."
+msgstr "%1$s٪ از جستجوها هیچ نتیجه‌ای ندارند. پرتکرارترینش «%2$s» است؛ برایش مترادف بسازید یا محصولش را اضافه کنید."
+
+#. translators: 1: number of terms, 2: failed term, 3: suggestion
+#: admin/views/view-dashboard.php:76
+#, php-format
+msgid "%1$s failed search looks like a typo of a successful one (e.g. \"%2$s\" → \"%3$s\"). One click creates the synonym."
+msgid_plural "%1$s failed searches look like typos of successful ones (e.g. \"%2$s\" → \"%3$s\"). One click creates the synonym."
+msgstr[0] "%1$s جستجوی بی‌نتیجه شبیه غلط تایپی یک جستجوی موفق است (مثلاً «%2$s» ← «%3$s»). با یک کلیک مترادفش ساخته می‌شود."
+
+#. translators: 1: term, 2: searches, 3: CTR
+#: admin/views/view-dashboard.php:87
+#, php-format
+msgid "\"%1$s\" was searched %2$s times and returns results, but only %3$s%% of searchers clicked one. Check that the best product appears first and that titles/images match what people expect."
+msgstr "«%1$s» %2$s بار جستجو شده و نتیجه هم دارد، اما فقط %3$s٪ جستجوکنندگان روی نتیجه‌ای کلیک کرده‌اند. بررسی کنید بهترین محصول اول نمایش داده شود و عنوان/تصاویر با انتظار مشتری بخواند."
+
+#. translators: 1: term, 2: count
+#: admin/views/view-dashboard.php:99
+#, php-format
+msgid "\"%1$s\" is a new trend: %2$s searches this period and none before."
+msgstr "«%1$s» یک ترند تازه است: %2$s جستجو در این بازه و هیچ جستجویی در بازه قبل."
+
+#. translators: 1: term, 2: growth percent
+#: admin/views/view-dashboard.php:101
+#, php-format
+msgid "Interest in \"%1$s\" grew %2$s%% compared with the previous period. Consider featuring it on the home page."
+msgstr "علاقه به «%1$s» نسبت به بازه قبل %2$s٪ رشد کرده است. نمایشش در صفحه اصلی را در نظر بگیرید."
+
+#. translators: %s: average position
+#: admin/views/view-dashboard.php:108
+#, php-format
+msgid "On average visitors click result #%s. The most relevant results are not at the top; synonyms and better product titles help."
+msgstr "بازدیدکنندگان به‌طور میانگین روی نتیجه شماره %s کلیک می‌کنند؛ یعنی مرتبط‌ترین نتایج بالای فهرست نیستند. مترادف‌ها و عنوان بهتر محصولات کمک می‌کنند."
+
+#: admin/views/view-dashboard.php:114
+msgid "No result clicks have been recorded yet. If your theme uses a custom live search, add its dropdown CSS class under Settings → Clicks & conversions."
+msgstr "هنوز کلیکی روی نتایج ثبت نشده است. اگر قالب شما جستجوی زنده اختصاصی دارد، کلاس CSS منوی آن را در تنظیمات ← کلیک‌ها و فروش وارد کنید."
+
+#: admin/views/view-dashboard.php:122
+msgid "Period"
+msgstr "بازه"
+
+#. translators: 1: start date, 2: end date, 3: period length such as "30 days"
+#: admin/views/view-dashboard.php:131
+#, php-format
+msgid "From %1$s to %2$s, compared with the previous %3$s."
+msgstr "از %1$s تا %2$s، در مقایسه با %3$s قبل از آن."
+
+#: admin/views/view-dashboard.php:148
+#: includes/class-asl-reports.php:67
+msgid "No-result rate"
+msgstr "نرخ بدون نتیجه"
+
+#: admin/views/view-dashboard.php:156
+msgid "searches that would have found nothing"
+msgstr "جستجوهایی که بدون این قابلیت بی‌نتیجه می‌ماندند"
+
+#: admin/views/view-dashboard.php:161
+#: includes/class-asl-reports.php:68
+msgid "Click-through rate"
+msgstr "نرخ کلیک"
+
+#: admin/views/view-dashboard.php:166
+msgid "Average click position"
+msgstr "میانگین رتبه کلیک"
+
+#: admin/views/view-dashboard.php:168
+msgid "lower is better"
+msgstr "هرچه کمتر، بهتر"
+
+#: admin/views/view-dashboard.php:173
+#: includes/class-asl-reports.php:70
+msgid "Revenue from search"
+msgstr "درآمد از جستجو"
+
+#. translators: 1: carts, 2: orders
+#: admin/views/view-dashboard.php:178
+#, php-format
+msgid "%1$s carts · %2$s orders"
+msgstr "%1$s سبد · %2$s سفارش"
+
+#: admin/views/view-dashboard.php:184
+msgid "Live search share"
+msgstr "سهم جستجوی زنده"
+
+#: admin/views/view-dashboard.php:192
+msgid "Insights"
+msgstr "پیشنهادها و نکته‌ها"
+
+#: admin/views/view-dashboard.php:203
+msgid "Total Searches Per Day"
+msgstr "کل جستجوها در هر روز"
+
+#: admin/views/view-dashboard.php:210
+msgid "Full review"
+msgstr "بررسی کامل"
+
+#: admin/views/view-dashboard.php:212
+msgid "Each one is a visitor who wanted something and found nothing. Fix them with a synonym, a redirect or by adding the product."
+msgstr "هر کدام یعنی مشتری‌ای که چیزی می‌خواست و چیزی پیدا نکرد. با مترادف، تغییر مسیر یا اضافه کردن محصول رفعشان کنید."
+
+#: admin/views/view-dashboard.php:214
+msgid "No failed searches in this period."
+msgstr "در این بازه جستجوی بی‌نتیجه‌ای نبوده است."
+
+#: admin/views/view-dashboard.php:217
+#: admin/views/view-review.php:82
+msgid "Times"
+msgstr "تعداد"
+
+#: admin/views/view-dashboard.php:217
+msgid "Fix"
+msgstr "رفع"
+
+#: admin/views/view-dashboard.php:224
+msgid "Did you mean:"
+msgstr "منظورتان این بود:"
+
+#: admin/views/view-dashboard.php:230
+msgid "Use suggestion"
+msgstr "استفاده از پیشنهاد"
+
+#: admin/views/view-dashboard.php:234
+msgid "Hide it until it fails again (e.g. after you added the product)."
+msgstr "تا وقتی دوباره بی‌نتیجه نشده پنهانش کن (مثلاً بعد از اضافه کردن محصول)."
+
+#: admin/views/view-dashboard.php:234
+msgid "Resolved"
+msgstr "رفع شد"
+
+#: admin/views/view-dashboard.php:246
+msgid "Top 10 Search Terms"
+msgstr "۱۰ عبارت برتر جستجوشده"
+
+#: admin/views/view-dashboard.php:247
+msgid "See all"
+msgstr "مشاهده همه"
+
+#: admin/views/view-dashboard.php:253
+#: includes/class-asl-settings.php:139
+msgid "Trending searches"
+msgstr "جستجوهای رو به رشد"
+
+#: admin/views/view-dashboard.php:255
+msgid "Nothing unusual compared with the previous period."
+msgstr "نسبت به بازه قبل مورد غیرعادی‌ای نیست."
+
+#: admin/views/view-dashboard.php:258
+msgid "Now"
+msgstr "اکنون"
+
+#: admin/views/view-dashboard.php:258
+msgid "Before"
+msgstr "قبل"
+
+#: admin/views/view-dashboard.php:258
+msgid "Change"
+msgstr "تغییر"
+
+#: admin/views/view-dashboard.php:274
+msgid "When do people search?"
+msgstr "مردم چه ساعتی جستجو می‌کنند؟"
+
+#: admin/views/view-dashboard.php:279
+msgid "Top searches in detail"
+msgstr "جزئیات جستجوهای برتر"
+
+#: admin/views/view-dashboard.php:287
+msgid "Avg. results"
+msgstr "میانگین نتایج"
+
+#: admin/views/view-dashboard.php:315
+msgid "Most clicked results"
+msgstr "پرکلیک‌ترین نتایج"
+
+#: admin/views/view-dashboard.php:317
+msgid "Click tracking is turned off in the settings."
+msgstr "ردیابی کلیک در تنظیمات خاموش است."
+
+#: admin/views/view-dashboard.php:319
+msgid "No clicks recorded in this period yet."
+msgstr "هنوز کلیکی در این بازه ثبت نشده است."
+
+#: admin/views/view-dashboard.php:322
+msgid "Page"
+msgstr "صفحه"
+
+#: admin/views/view-dashboard.php:322
+msgid "Avg. position"
+msgstr "میانگین رتبه"
+
+#: admin/views/view-dashboard.php:337
+msgid "Where searches happen"
+msgstr "جستجوها از کجا انجام می‌شوند"
+
+#. translators: %s: shortcode
+#: admin/views/view-dashboard.php:345
+#, php-format
+msgid "Tip: show your visitors what others search for with the %s shortcode."
+msgstr "نکته: با کد کوتاه %s جستجوهای پرطرفدار را به بازدیدکنندگان نشان دهید."
+
+#: admin/views/view-logs-page.php:28
+msgid "Export filtered results (CSV)"
+msgstr "خروجی CSV از نتایج فیلترشده"
+
+#: admin/views/view-logs-page.php:28
+msgid "Export all as CSV"
+msgstr "همه را به صورت CSV صادر کنید"
+
+#. translators: %s: search term
+#: admin/views/view-logs-page.php:36
+#, php-format
+msgid "Showing searches for \"%s\"."
+msgstr "نمایش جستجوهای «%s»."
+
+#: admin/views/view-logs-page.php:40
+msgid "Show all terms"
+msgstr "نمایش همه عبارت‌ها"
+
+#: admin/views/view-logs-page.php:45
+msgid "Every search"
+msgstr "همه جستجوها"
+
+#: admin/views/view-logs-page.php:46
+msgid "Grouped by term"
+msgstr "گروه‌بندی بر اساس عبارت"
+
+#: admin/views/view-logs-page.php:55
+msgid "Search Terms"
+msgstr "عبارات جستجو"
+
+#: admin/views/view-logs-page.php:61
+msgid "Are you sure you want to delete ALL search logs? This cannot be undone."
+msgstr "آیا مطمئن هستید که می‌خواهید همه گزارش‌های جستجو را حذف کنید؟ این کار قابل بازگشت نیست."
+
+#: admin/views/view-logs-page.php:66
+msgid "Clear All Logs"
+msgstr "پاک کردن همه گزارش‌ها"
+
+#. translators: %s: days
+#: admin/views/view-logs-page.php:74
+#, php-format
+msgid "Logs older than %s days are deleted automatically."
+msgstr "گزارش‌های قدیمی‌تر از %s روز به‌طور خودکار حذف می‌شوند."
+
+#: admin/views/view-logs-page.php:75
+msgid "Logs are kept forever."
+msgstr "گزارش‌ها برای همیشه نگهداری می‌شوند."
+
+#: admin/views/view-review.php:17
+msgid "Even with automatic fixes nothing matches. This is the list of products people want that you do not sell (or that are named differently)."
+msgstr "حتی با اصلاح خودکار هم چیزی پیدا نمی‌شود. این فهرست محصولاتی است که مشتری‌ها می‌خواهند و شما نمی‌فروشید (یا با اسم دیگری ثبت شده‌اند)."
+
+#: admin/views/view-review.php:18
+msgid "The exact product is not found, so visitors now see related products (found with fewer words). Check them: add a precise rule, or mark as \"we don't have it\"."
+msgstr "خود محصول پیدا نمی‌شود و بازدیدکننده الان محصولات مرتبط را می‌بیند (با کلمه‌های کمتر). بررسی کنید: یا قانون دقیق بسازید یا «نداریم» بزنید."
+
+#: admin/views/view-review.php:19
+msgid "Typos, missing آ, glued numbers or pasted text. Visitors now get the right products automatically."
+msgstr "غلط تایپی، آ جاافتاده، عدد چسبیده یا متن کپی‌شده. بازدیدکننده الان خودکار محصول درست را می‌بیند."
+
+#: admin/views/view-review.php:20
+msgid "These find products today without any fix (a product was added, a rule exists, or Arabic/Persian letters and digits are matched)."
+msgstr "این‌ها امروز بدون هیچ اصلاحی نتیجه دارند (محصولش اضافه شده، قانون دارد، یا تفاوت حروف و اعداد فارسی/عربی دیگر مشکلی ایجاد نمی‌کند)."
+
+#: admin/views/view-review.php:21
+msgid "Junk or irrelevant searches you chose to hide."
+msgstr "جستجوهای بی‌ربط یا اشتباهی که پنهانشان کرده‌اید."
+
+#: admin/views/view-review.php:29
+msgid "Re-check all with current products"
+msgstr "بررسی دوباره همه با محصولات فعلی"
+
+#: admin/views/view-review.php:30
+msgid "Export this list (CSV)"
+msgstr "خروجی همین فهرست (CSV)"
+
+#: admin/views/view-review.php:34
+msgid "Every search that ever found nothing is tested again against today's products, rules and automatic fixes. This runs by itself every night; use the button after adding products."
+msgstr "هر جستجویی که تا حالا بی‌نتیجه مانده، دوباره با محصولات، قانون‌ها و اصلاح‌های خودکار امروز امتحان می‌شود. این کار هر شب خودکار انجام می‌شود؛ بعد از اضافه کردن محصول جدید هم می‌توانید دکمه را بزنید."
+
+#. translators: %s: date
+#: admin/views/view-review.php:38
+#, php-format
+msgid "Last check: %s"
+msgstr "آخرین بررسی: %s"
+
+#. translators: %s: number of searches
+#: admin/views/view-review.php:53
+#, php-format
+msgid "%s searches"
+msgstr "%s جستجو"
+
+#. translators: %s: number
+#: admin/views/view-review.php:67
+#, php-format
+msgid "Ignored (%s)"
+msgstr "نادیده گرفته‌شده (%s)"
+
+#: admin/views/view-review.php:76
+msgid "Nothing in this group."
+msgstr "موردی در این گروه نیست."
+
+#: admin/views/view-review.php:76
+msgid "Not checked yet. Click \"Re-check all with current products\"."
+msgstr "هنوز بررسی نشده. روی «بررسی دوباره همه با محصولات فعلی» بزنید."
+
+#: admin/views/view-review.php:81
+msgid "What visitors searched"
+msgstr "چیزی که جستجو کردند"
+
+#. translators: %s: number of results
+#: admin/views/view-review.php:102
+#: admin/views/view-synonyms.php:103
+#, php-format
+msgid "%s result"
+msgid_plural "%s results"
+msgstr[0] "%s نتیجه"
+
+#: admin/views/view-review.php:115
+msgid "We don't have it"
+msgstr "نداریم"
+
+#: admin/views/view-review.php:118
+msgid "Undo"
+msgstr "برگرداندن"
+
+#: admin/views/view-review.php:120
+msgid "Junk or irrelevant: hide it."
+msgstr "بی‌ربط یا اشتباه است: پنهانش کن."
+
+#: admin/views/view-review.php:120
+msgid "Ignore"
+msgstr "نادیده بگیر"
+
+#: admin/views/view-settings.php:25
+msgid "Tools"
+msgstr "ابزارها"
+
+#: admin/views/view-settings.php:29
+msgid "Send the report now (test)"
+msgstr "ارسال گزارش همین الان (آزمایشی)"
+
+#. translators: %s: date
+#: admin/views/view-settings.php:35
+#, php-format
+msgid "Next scheduled report: %s"
+msgstr "گزارش بعدی: %s"
+
+#: admin/views/view-settings.php:41
+msgid "For developers"
+msgstr "برای توسعه‌دهندگان"
+
+#: admin/views/view-settings.php:43
+msgid "popular searches with results, for your search page or header."
+msgstr "جستجوهای پرطرفدار دارای نتیجه، برای صفحه جستجو یا هدر."
+
+#: admin/views/view-settings.php:44
+msgid "log searches from a custom engine that does not use WP_Query."
+msgstr "ثبت جستجو از موتور جستجوی اختصاصی که از WP_Query استفاده نمی‌کند."
+
+#: admin/views/view-settings.php:45
+msgid "filters"
+msgstr "فیلترها"
+
+#: admin/views/view-settings.php:45
+msgid "actions"
+msgstr "اکشن‌ها"
+
+#: admin/views/view-settings.php:46
+msgid "WP-CLI commands."
+msgstr "دستورهای WP-CLI."
+
+#: admin/views/view-synonyms.php:27
+msgid "Export rules (CSV)"
+msgstr "خروجی قوانین (CSV)"
+
+#: admin/views/view-synonyms.php:29
+msgid "Manage rules to redirect searches or replace them with synonyms."
+msgstr "قوانین را برای تغییر مسیر جستجوها یا جایگزینی آنها با مترادف‌ها مدیریت کنید."
+
+#: admin/views/view-synonyms.php:33
+msgid "Edit rule"
+msgstr "ویرایش قانون"
+
+#: admin/views/view-synonyms.php:33
+msgid "Add New Rule"
+msgstr "اضافه کردن قانون جدید"
+
+#: admin/views/view-synonyms.php:40
+msgid "When a visitor searches for"
+msgstr "وقتی بازدیدکننده این را جستجو کرد"
+
+#: admin/views/view-synonyms.php:45
+msgid "You can enter several spellings at once, separated by commas or new lines (e.g. هودی، هودي، hoodie). Persian/Arabic letters, digits and half-spaces are matched automatically."
+msgstr "می‌توانید چند املا را یکجا وارد کنید و با کاما یا خط جدید جدا کنید (مثلاً هودی، هودي، hoodie). تفاوت حروف فارسی/عربی، اعداد و نیم‌فاصله خودکار نادیده گرفته می‌شود."
+
+#: admin/views/view-synonyms.php:50
+msgid "Match"
+msgstr "نوع تطابق"
+
+#: admin/views/view-synonyms.php:52
+msgid "Exact match — the whole search is this term"
+msgstr "تطابق دقیق — کل جستجو همین عبارت باشد"
+
+#: admin/views/view-synonyms.php:53
+msgid "Contains the word — e.g. \"هودی\" also matches \"هودی مردانه\""
+msgstr "شامل کلمه — مثلاً «هودی» با «هودی مردانه» هم مطابقت دارد"
+
+#: admin/views/view-synonyms.php:54
+msgid "Starts with the word"
+msgstr "شروع با این کلمه"
+
+#: admin/views/view-synonyms.php:59
+msgid "Rule Type"
+msgstr "نوع قانون"
+
+#: admin/views/view-synonyms.php:61
+msgid "Synonym (Show results for...)"
+msgstr "مترادف (نمایش نتایج برای...)"
+
+#: admin/views/view-synonyms.php:62
+msgid "Redirect (Send user to URL)"
+msgstr "تغییر مسیر (ارسال کاربر به URL)"
+
+#: admin/views/view-synonyms.php:67
+msgid "Target"
+msgstr "هدف"
+
+#: admin/views/view-synonyms.php:69
+msgid "Synonym: the term that should be searched instead. With \"contains\", only the matched word is replaced."
+msgstr "مترادف: عبارتی که به‌جای آن جستجو شود. در حالت «شامل کلمه» فقط همان کلمه جایگزین می‌شود."
+
+#: admin/views/view-synonyms.php:70
+msgid "Redirect: a full URL or a path like /product-category/pumps/. Persian URLs are fine. Use {query} to pass the search on, e.g. /shop/?s={query}. Live search dropdowns keep showing normal results; the redirect happens when Enter is pressed."
+msgstr "تغییر مسیر: نشانی کامل یا مسیری مثل /product-category/pumps/. نشانی فارسی هم مشکلی ندارد. با {query} می‌توانید عبارت جستجو را منتقل کنید، مثل /shop/?s={query}. منوی جستجوی زنده همچنان نتایج عادی را نشان می‌دهد و تغییر مسیر با زدن Enter انجام می‌شود."
+
+#: admin/views/view-synonyms.php:74
+msgid "Active"
+msgstr "فعال"
+
+#: admin/views/view-synonyms.php:77
+msgid "Update rule"
+msgstr "به‌روزرسانی قانون"
+
+#: admin/views/view-synonyms.php:77
+msgid "Add Rule"
+msgstr "اضافه کردن قانون"
+
+#: admin/views/view-synonyms.php:79
+msgid "Cancel"
+msgstr "انصراف"
+
+#: admin/views/view-synonyms.php:86
+msgid "Test a search"
+msgstr "آزمایش یک جستجو"
+
+#: admin/views/view-synonyms.php:87
+msgid "See what your site does with a search: rules, the normal result and, if it finds nothing, the automatic fixes."
+msgstr "ببینید سایت با یک جستجو چه می‌کند: قانون‌ها، نتیجه معمولی و اگر چیزی پیدا نشد، اصلاح‌های خودکار."
+
+#: admin/views/view-synonyms.php:90
+msgid "e.g. لولهاب3/4"
+msgstr "مثلاً لولهاب3/4"
+
+#: admin/views/view-synonyms.php:91
+msgid "Test"
+msgstr "آزمایش"
+
+#: admin/views/view-synonyms.php:114
+msgid "Still nothing. Add a synonym/redirect rule or the missing product."
+msgstr "هنوز نتیجه‌ای نیست. یک قانون مترادف/تغییر مسیر بسازید یا محصول را اضافه کنید."
+
+#: admin/views/view-synonyms.php:120
+msgid "Import rules"
+msgstr "درون‌ریزی قوانین"
+
+#: admin/views/view-synonyms.php:121
+msgid "CSV columns: term, type (synonym/redirect), match_type (exact/contains/starts), target, status. A simple two-column file \"term,target\" also works. Existing terms are updated."
+msgstr "ستون‌های CSV: term، type (synonym/redirect)، match_type (exact/contains/starts)، target، status. فایل ساده دوستونه «عبارت،هدف» هم قبول است. عبارت‌های موجود به‌روزرسانی می‌شوند."
+
+#: admin/views/view-synonyms.php:126
+msgid "Import"
+msgstr "درون‌ریزی"
+
+#: admin/views/view-synonyms.php:128
+msgid "How rules are applied"
+msgstr "قوانین چطور اعمال می‌شوند"
+
+#: admin/views/view-synonyms.php:130
+msgid "Exact rules win over \"starts with\", which wins over \"contains\"."
+msgstr "قانون «تطابق دقیق» بر «شروع با» و «شروع با» بر «شامل کلمه» اولویت دارد."
+
+#: admin/views/view-synonyms.php:131
+msgid "Synonyms work in live (AJAX) search and on the results page; the original term is still logged so you can measure the effect."
+msgstr "مترادف‌ها هم در جستجوی زنده (ایجکس) و هم در صفحه نتایج کار می‌کنند؛ عبارت اصلی همچنان ثبت می‌شود تا اثرش را بسنجید."
+
+#: admin/views/view-synonyms.php:132
+msgid "The \"Used\" column counts how often each rule fired."
+msgstr "ستون «دفعات استفاده» نشان می‌دهد هر قانون چند بار اجرا شده است."
+
+#: admin/views/view-synonyms.php:138
+msgid "Existing Rules"
+msgstr "قوانین موجود"
+
+#: admin/views/view-synonyms.php:142
+msgid "Search rules"
+msgstr "جستجو در قوانین"
+
+#: includes/class-asl-clicks.php:341
+msgid "Found through site search:"
+msgstr "پیدا شده از طریق جستجوی سایت:"
+
+#. translators: %s: search term
+#: includes/class-asl-db.php:682
+#, php-format
+msgid "A rule for \"%s\" already exists. Edit that rule instead."
+msgstr "برای «%s» از قبل قانون وجود دارد. همان قانون را ویرایش کنید."
+
+#: includes/class-asl-db.php:693
+msgid "The rule could not be saved."
+msgstr "قانون ذخیره نشد."
+
+#: includes/class-asl-privacy.php:31
+#: includes/class-asl-privacy.php:45
+#: includes/class-asl-privacy.php:67
+msgid "Site search history"
+msgstr "سابقه جستجوی سایت"
+
+#: includes/class-asl-privacy.php:120
+msgid "When you use the search on this site we record the words you searched for, the number of results, which result you clicked and, for logged-in customers, your user account. We do not store your IP address; an anonymous, one-way identifier is used to count unique searchers. A first-party cookie (asl_sid, 1 hour) links a search to the result you open, and a second cookie (asl_cart, 7 days) links it to products you buy. This data is used only to improve our search and catalogue and is deleted automatically after a limited period."
+msgstr "وقتی از جستجوی این سایت استفاده می‌کنید، کلماتی که جستجو کرده‌اید، تعداد نتایج، نتیجه‌ای که روی آن کلیک کرده‌اید و برای مشتریان واردشده، حساب کاربری‌شان ثبت می‌شود. آی‌پی شما ذخیره نمی‌شود و برای شمارش جستجوکنندگان یکتا از یک شناسه ناشناس و یک‌طرفه استفاده می‌شود. یک کوکی داخلی (asl_sid، یک ساعت) جستجو را به نتیجه‌ای که باز می‌کنید و کوکی دیگری (asl_cart، ۷ روز) آن را به محصولاتی که می‌خرید مرتبط می‌کند. این داده‌ها فقط برای بهبود جستجو و فهرست محصولات استفاده می‌شوند و پس از مدت محدودی خودکار حذف می‌شوند."
+
+#: includes/class-asl-reports.php:53
+msgid "fix"
+msgstr "رفع"
+
+#. translators: %s: suggested search term
+#: includes/class-asl-reports.php:56
+#, php-format
+msgid "did you mean \"%s\"?"
+msgstr "منظورتان «%s» بود؟"
+
+#: includes/class-asl-reports.php:80
+msgid "No data."
+msgstr "داده‌ای نیست."
+
+#: includes/class-asl-reports.php:81
+msgid "No failed searches. Great!"
+msgstr "هیچ جستجوی بی‌نتیجه‌ای نبود. عالی!"
+
+#: includes/class-asl-reports.php:82
+msgid "Nothing unusual this week."
+msgstr "این هفته مورد غیرعادی‌ای نبود."
+
+#: includes/class-asl-settings.php:63
+msgid "Weekly search report for {site_name}"
+msgstr "گزارش هفتگی جستجوی {site_name}"
+
+#: includes/class-asl-settings.php:134
+msgid "Search report for {site_name}"
+msgstr "گزارش جستجوی {site_name}"
+
+#: includes/class-asl-settings.php:135
+msgid "Summary of the last 7 days, ending {report_date}."
+msgstr "خلاصه ۷ روز گذشته تا {report_date}."
+
+#: includes/class-asl-settings.php:137
+msgid "Top searches"
+msgstr "جستجوهای برتر"
+
+#: includes/class-asl-settings.php:138
+msgid "Searches with no results (fix these first)"
+msgstr "جستجوهای بدون نتیجه (اول این‌ها را رفع کنید)"
+
+#: includes/class-asl-settings.php:140
+msgid "Open the full dashboard"
+msgstr "باز کردن داشبورد کامل"
+
+#. translators: 1: term used, 2: what the visitor typed
+#: includes/class-asl-smart.php:829
+#, php-format
+msgid "Showing results for %1$s. Nothing matched %2$s exactly."
+msgstr "نمایش نتایج برای %1$s؛ برای %2$s دقیقاً نتیجه‌ای پیدا نشد."
+
+#: includes/class-asl-smart.php:857
+msgid "Popular searches:"
+msgstr "جستجوهای پرطرفدار:"
+
+#: includes/class-asl-smart.php:881
+msgid "Redirect rule"
+msgstr "قانون تغییر مسیر"
+
+#: includes/class-asl-smart.php:881
+msgid "Synonym rule"
+msgstr "قانون مترادف"
+
+#: includes/class-asl-smart.php:892
+msgid "Normal search"
+msgstr "جستجوی معمولی"
+
+#: includes/class-asl-smart.php:900
+msgid "Clean-up"
+msgstr "مرتب‌سازی متن"
+
+#: includes/class-asl-smart.php:901
+msgid "Spelling fix"
+msgstr "اصلاح املا"
+
+#: includes/class-asl-smart.php:902
+msgid "Fewer words"
+msgstr "کلمه‌های کمتر"
+
+#: includes/class-asl-smart.php:913
+msgid "too broad, skipped"
+msgstr "خیلی کلی است، رد شد"
+
+#: includes/functions.php:176
+msgid "Results page"
+msgstr "صفحه نتایج"
+
+#: includes/functions.php:177
+msgid "Live (AJAX) search"
+msgstr "جستجوی زنده (ایجکس)"
+
+#: includes/functions.php:178
+msgid "REST API"
+msgstr "REST API"
+
+#: includes/functions.php:179
+msgid "Redirected"
+msgstr "تغییر مسیر داده شد"
+
+#: includes/functions.php:180
+msgid "Custom integration"
+msgstr "یکپارچه‌سازی اختصاصی"
