@@ -140,12 +140,48 @@ class ASL_Logger {
 			return (int) $last->id;
 		}
 		$typing = 'ajax' === $data['source'] && 'ajax' === $last->source;
-		$prefix = 0 === strpos( $data['term_norm'], $last->term_norm ) || 0 === strpos( $last->term_norm, $data['term_norm'] );
-		if ( $typing && $prefix ) {
+		if ( $typing && self::is_edit_of( $last->term_norm, $data['term_norm'] ) ) {
 			ASL_DB::update_log( $last->id, $data );
 			return (int) $last->id;
 		}
 		return 0;
+	}
+
+	/**
+	 * Is $b the same live search as $a, one edit further? Typing on ("پم" > "پمپ"), deleting
+	 * ("گیج فش" > "گیج ف"), and also changing the middle or the start of what is already typed:
+	 * "فلنچ سایز 355" > "فلنچ پسایز 355" > "فلنچ پلی سایز 355", or "اره عمود" > "ره عمود".
+	 * Only the prefix test was used before, so every middle edit was logged as a separate failed search.
+	 *
+	 * @param string $a Earlier normalized term.
+	 * @param string $b Newer normalized term.
+	 * @return bool
+	 */
+	public static function is_edit_of( $a, $b ) {
+		$a = (string) $a;
+		$b = (string) $b;
+		if ( '' === $a || '' === $b ) {
+			return false;
+		}
+		if ( 0 === strpos( $b, $a ) || 0 === strpos( $a, $b ) ) {
+			return true;
+		}
+		$x  = preg_split( '//u', $a, -1, PREG_SPLIT_NO_EMPTY );
+		$y  = preg_split( '//u', $b, -1, PREG_SPLIT_NO_EMPTY );
+		$lx = count( $x );
+		$ly = count( $y );
+		$p  = 0;
+		while ( $p < $lx && $p < $ly && $x[ $p ] === $y[ $p ] ) {
+			$p++;
+		}
+		$s = 0;
+		while ( $s < $lx - $p && $s < $ly - $p && $x[ $lx - 1 - $s ] === $y[ $ly - 1 - $s ] ) {
+			$s++;
+		}
+		// Almost all of the shorter text is kept unchanged at its two ends (one edited stretch,
+		// at most two of its letters changed): an edit, not a new search that only shares a word.
+		$short = min( $lx, $ly );
+		return $short >= 3 && ( $p + $s ) >= max( $short - 2, (int) ceil( 0.6 * $short ) );
 	}
 
 	/**

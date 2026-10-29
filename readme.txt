@@ -4,7 +4,7 @@ Tags: search analytics, search log, woocommerce search, synonyms, search redirec
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.3.3
+Stable tag: 3.3.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,6 +60,14 @@ Add the CSS class of the dropdown under Settings → Clicks & conversions → Ex
 No. One small insert per search, a cached rule lookup and a 1.5 KB script without dependencies.
 
 == Changelog ==
+
+= 3.3.4 =
+* Fix: live-search keystrokes that change the middle or the start of what was typed ("فلنچ سایز 355" → "فلنچ پلی سایز 355", "اره عمود" → "ره عمود") were logged as separate failed searches; they are now one search, like typing at the end.
+* Fix: the spelling fix no longer cuts real words into 2-letter pieces ("دینام" → "دی نام", "انسانی" → "ان سانی"); only real short words such as "آب" may be split off (filter asl_split_short_words).
+* Fix: words joined by half-spaces ("پلی‌اتیلن", "شیرخودکار‌یک‌اینچ") were dropped as unknown when a search was shortened.
+* Fix: 7-letter words are corrected by one letter only ("استاتور" was turned into "استارتر").
+* New: 4-letter words with two letters swapped ("upcv" → "upvc") or a look-alike letter ("فلنچ" → "فلنج") are corrected.
+* New: a Persian search typed with the keyboard on English ("uhdr" → "عایق") is understood when every word is in the catalog.
 
 = 3.3.3 =
 * Tweak: the currency on the revenue tile is shown smaller under the amount instead of being cut off.

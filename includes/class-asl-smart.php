@@ -363,6 +363,12 @@ class ASL_Smart {
 	 */
 	public static function candidate_steps( $term, $relax = true ) {
 		$steps = array();
+		$orig  = $term;
+		$kb    = self::keyboard_fix( $term );
+		if ( '' !== $kb ) {
+			$term = $kb;
+			$steps[] = array( $kb, 'spelling' );
+		}
 		$clean = self::cleanup( $term );
 		$fixed = self::spellfix( $clean );
 		$steps[] = array( $clean, 'cleanup' );
@@ -421,7 +427,7 @@ class ASL_Smart {
 			$steps[] = array( $m[0], 'fewer_words' );
 		}
 
-		$seen  = array( $term => true );
+		$seen  = array( $orig => true );
 		$out   = array();
 		$multi = count( $words ) >= 2;
 		foreach ( $steps as $step ) {
@@ -498,6 +504,9 @@ class ASL_Smart {
 	 */
 	public static function cleanup( $s ) {
 		$s = ASL_Normalizer::fix_query( $s );
+		// Half-spaces become spaces: titles' words are counted apart ("پلی‌اتیلن" = "پلی" + "اتیلن"), and a
+		// glued "شیرخودکار‌یک‌اینچ" otherwise stays one unknown word that the relax step throws away.
+		$s = str_replace( "\u{200C}", ' ', $s );
 		// Text pasted together with product-page buttons, greetings and buying words.
 		$junk = apply_filters(
 			'asl_search_junk_phrases',
@@ -621,10 +630,12 @@ class ASL_Smart {
 					$b = $alt_b;
 				}
 			}
-			// Both parts must be real words: 2-letter parts only when common (آب), never little words (در، بر).
+			// Both parts must be real words. A 2-letter part only when it is a real short word (آب):
+			// frequent 2-letter pieces of codes and brands cut real words apart ("دینام" → "دی نام",
+			// "انسانی" → "ان سانی", "فلورو" → "فلو رو"). Never little words (در، بر).
 			$stop = self::stop_words();
-			$ok_a = ASL_Normalizer::length( $a ) >= 3 || ( isset( $vocab[ $a ] ) && $vocab[ $a ][1] >= 20 );
-			$ok_b = ASL_Normalizer::length( $b ) >= 3 || ( isset( $vocab[ $b ] ) && $vocab[ $b ][1] >= 20 );
+			$ok_a = ASL_Normalizer::length( $a ) >= 3 || in_array( $a, self::short_words(), true );
+			$ok_b = ASL_Normalizer::length( $b ) >= 3 || in_array( $b, self::short_words(), true );
 			if ( ! $ok_a || ! $ok_b || in_array( $a, $stop, true ) || in_array( $b, $stop, true ) ) {
 				continue;
 			}
@@ -642,7 +653,8 @@ class ASL_Smart {
 		if ( $len <= 3 ) {
 			return $best_split ? $best_split : $w;
 		}
-		$max       = $len >= 7 ? 2 : 1;
+		// Two edits only from 8 letters: at 7 they turn one part into another ("استاتور" → "استارتر").
+		$max       = $len >= 8 ? 2 : 1;
 		$best      = null;
 		$best_dist = PHP_INT_MAX;
 		$best_f    = 0;
@@ -663,7 +675,9 @@ class ASL_Smart {
 			}
 			// 4-letter words: only a forgotten letter ("کاید" → "کلید"). Changing or dropping one makes
 			// a different common word too easily ("برقو" → "برقی", "کاتر" → "کار").
-			if ( 4 === $len && $vl !== $len + 1 ) {
+			// Also allowed at 4 letters: two neighbouring letters swapped ("upcv" → "upvc") and one letter
+			// written with its usual look-alike ("فلنچ" → "فلنج").
+			if ( 4 === $len && $vl !== $len + 1 && ! self::swap_or_lookalike( $n, $vw ) ) {
 				continue;
 			}
 			$d = ASL_Normalizer::distance( $n, $vw );
@@ -677,6 +691,96 @@ class ASL_Smart {
 			return $best_split;
 		}
 		return null !== $best ? $best : ( $best_split ? $best_split : $w );
+	}
+
+	/**
+	 * 2-letter words that may be one half of two words written together ("لولهاب" → "لوله آب").
+	 *
+	 * @return string[] Normalized.
+	 */
+	private static function short_words() {
+		return array_map( array( 'ASL_Normalizer', 'normalize' ), (array) apply_filters( 'asl_split_short_words', array( 'آب' ) ) );
+	}
+
+	/**
+	 * Same length, and either two neighbouring letters swapped or one letter replaced by its usual look-alike.
+	 *
+	 * @param string $a Word (normalized).
+	 * @param string $b Catalog word (normalized).
+	 * @return bool
+	 */
+	private static function swap_or_lookalike( $a, $b ) {
+		$x = preg_split( '//u', $a, -1, PREG_SPLIT_NO_EMPTY );
+		$y = preg_split( '//u', $b, -1, PREG_SPLIT_NO_EMPTY );
+		if ( count( $x ) !== count( $y ) ) {
+			return false;
+		}
+		$diff = array();
+		foreach ( $x as $i => $c ) {
+			if ( $c !== $y[ $i ] ) {
+				$diff[] = $i;
+			}
+		}
+		if ( 2 === count( $diff ) && $diff[1] === $diff[0] + 1 ) {
+			return $x[ $diff[0] ] === $y[ $diff[1] ] && $x[ $diff[1] ] === $y[ $diff[0] ];
+		}
+		if ( 1 !== count( $diff ) ) {
+			return false;
+		}
+		$pair   = array( $x[ $diff[0] ], $y[ $diff[0] ] );
+		$groups = array( array( 'چ', 'ج' ), array( 'ز', 'ذ', 'ض', 'ظ', 'ژ' ), array( 'س', 'ص', 'ث' ), array( 'ت', 'ط' ), array( 'ه', 'ح' ), array( 'ق', 'غ' ), array( 'ا', 'آ' ), array( 'پ', 'ب' ), array( 'گ', 'ک' ) );
+		foreach ( $groups as $g ) {
+			if ( in_array( $pair[0], $g, true ) && in_array( $pair[1], $g, true ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * A Persian search typed with the keyboard left on English ("uhdr" → "عایق", "ok; ;kkn" → "خنک کنن").
+	 * Returned only when every word it gives is a word of the catalog; '' otherwise.
+	 *
+	 * @param string $s Term.
+	 * @return string
+	 */
+	public static function keyboard_fix( $s ) {
+		$s = trim( (string) $s );
+		if ( '' === $s || preg_match( '/[\x{0600}-\x{06FF}]/u', $s ) || ! preg_match( '/[a-z]/i', $s ) ) {
+			return '';
+		}
+		$map = array(
+			'q' => 'ض', 'w' => 'ص', 'e' => 'ث', 'r' => 'ق', 't' => 'ف', 'y' => 'غ', 'u' => 'ع', 'i' => 'ه', 'o' => 'خ', 'p' => 'ح', '[' => 'ج', ']' => 'چ', '\\' => 'پ',
+			'a' => 'ش', 's' => 'س', 'd' => 'ی', 'f' => 'ب', 'g' => 'ل', 'h' => 'ا', 'j' => 'ت', 'k' => 'ن', 'l' => 'م', ';' => 'ک', "'" => 'گ',
+			'z' => 'ظ', 'x' => 'ط', 'c' => 'ز', 'v' => 'ر', 'b' => 'ذ', 'n' => 'د', 'm' => 'پ', ',' => 'و', 'H' => 'آ',
+		);
+		$out = '';
+		foreach ( preg_split( '//u', $s, -1, PREG_SPLIT_NO_EMPTY ) as $c ) {
+			if ( isset( $map[ $c ] ) ) {
+				$out .= $map[ $c ];
+			} elseif ( isset( $map[ strtolower( $c ) ] ) ) {
+				$out .= $map[ strtolower( $c ) ];
+			} else {
+				$out .= $c;
+			}
+		}
+		$vocab = self::vocab();
+		$words = preg_split( '/\s+/u', trim( $out ), -1, PREG_SPLIT_NO_EMPTY );
+		if ( ! $words ) {
+			return '';
+		}
+		$real = 0;
+		foreach ( $words as $w ) {
+			$n = ASL_Normalizer::normalize( $w );
+			if ( preg_match( '/^[\d.\/]+$/', $n ) ) {
+				continue;                       // a size typed with the word stays as it is
+			}
+			if ( ASL_Normalizer::length( $n ) < 2 || ! isset( $vocab[ $n ] ) ) {
+				return '';                      // a model code ("ucp204"), not a Persian word
+			}
+			$real++;
+		}
+		return $real ? implode( ' ', $words ) : '';
 	}
 
 	/* ------------------------------------------------------------------ *

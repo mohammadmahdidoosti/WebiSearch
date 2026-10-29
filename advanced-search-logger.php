@@ -3,7 +3,7 @@
  * Plugin Name:       WebiSearch
  * Plugin URI:        https://webiloper.ir/
  * Description:       Search analytics for any WordPress site: logs standard, AJAX and live searches, measures result clicks and WooCommerce conversions, finds failed searches and fixes them with synonyms and redirects.
- * Version:           3.3.3
+ * Version:           3.3.4
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            webiloper
@@ -20,7 +20,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'ASL_VERSION', '3.3.3' );
+define( 'ASL_VERSION', '3.3.4' );
 define( 'ASL_DB_VERSION', '3.3.2' );
 define( 'ASL_PLUGIN_FILE', __FILE__ );
 define( 'ASL_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
